@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/10/19 20:53:41 by hyap             ###   ########.fr        #
+#    Updated: 2022/10/20 21:42:27 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ RM = rm -f
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	${CC} ${CFLAGS} ${FSANITIZE} -I includes ${SRCS} ${LIBMLX} -o ${NAME}
+	${CC} ${CFLAGS} -I includes ${SRCS} ${LIBMLX} -o ${NAME}
 
 clean:
 	${RM} ${NAME}

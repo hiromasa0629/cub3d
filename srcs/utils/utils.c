@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:47:20 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/19 22:04:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/20 22:00:12 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,19 +26,23 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 	return (0);
 }
 
-int	is_element(char *s)
+int	ft_atoi(const char *s)
 {
-	if (ft_strncmp(s, "NO", 2) == 0)
-		return (1);
-	if (ft_strncmp(s, "SO", 2) == 0)
-		return (1);
-	if (ft_strncmp(s, "WE", 2) == 0)
-		return (1);
-	if (ft_strncmp(s, "EA", 2) == 0)
-		return (1);
-	if (ft_strncmp(s, "F", 1) == 0)
-		return (1);
-	if (ft_strncmp(s, "C", 1) == 0)
-		return (1);
-	return (0);
+	int	i;
+	int	ans;
+	int	res;
+
+	ans = 1;
+	i = 0;
+	if (s[i] == '-' || s[i] == '+')
+	{
+		if (s[i] == '-')
+			ans = ans * -1;
+		i++;
+	}
+	res = 0;
+	while (s[i] >= '0' && s[i] <= '9')
+		res = (res * 10) + (s[i++] - '0');
+	ans = ans * res;
+	return (ans);
 }

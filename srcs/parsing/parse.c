@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:34:31 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/19 21:50:36 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/20 21:36:26 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int	get_line_no(char *map_path)
 	return (line_no);
 }
 
-char	**store_tmp_lines(char *map_path)
+char	**store_tmp_file_content(char *map_path)
 {
 	int		line_no;
 	char	**lines;
@@ -56,14 +56,17 @@ char	**store_tmp_lines(char *map_path)
 		gnl = get_next_line(fd, &line);
 		lines[i++] = line;
 	}
+	close(fd);
 	return (lines);
 }
 
 void	parse(t_game *game, char *map_path)
 {
 	(void)game;
-	char	**lines;
+	char	**file_content;
 	
 	validate_extension(map_path);
-	lines = store_tmp_lines(map_path);
+	file_content = store_tmp_file_content(map_path);
+	if (!is_valid_file_content(file_content))
+		exit_error("Invalid file content !\n");
 }

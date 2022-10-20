@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/04/29 16:09:34 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/19 22:05:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/20 20:05:31 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,6 @@ void	free_splits(char **splits)
 	
 	i = 0;
 	while (splits[i])
-		free(splits[i]);
+		free(splits[i++]);
 	free(splits);
 }
