@@ -6,11 +6,11 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:00:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 12:07:03 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/21 16:24:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "parsing.h"
+#include "utils.h"
 
 int	is_duplicated_element(char *s)
 {
@@ -75,3 +75,24 @@ int	is_str_digit(char *s)
 	return (1);
 }
 
+int	get_file_line_no(char *map_path)
+{
+	int		fd;
+	int		gnl;
+	int		line_no;
+	char	*line;
+
+	fd = open(map_path, O_RDONLY);
+	if (fd < 0)
+		exit_error("Invalid file !\n");
+	gnl = 1;
+	line_no = 0;
+	while (gnl == 1)
+	{
+		gnl = get_next_line(fd, &line);
+		free(line);
+		line_no++;
+	}
+	close(fd);
+	return (line_no);
+}

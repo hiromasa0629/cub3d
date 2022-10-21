@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 11:24:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/21 17:00:52 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,17 @@ void	free_splits(char **splits);
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *s);
 /* map_utils.c */
-int	is_space(char **lines, t_int_pos pos);
-int	is_wall(char **lines, t_int_pos pos);
-int	is_player(char **lines, t_int_pos pos);
-int	is_floor(char **lines, t_int_pos pos);
+int		is_space(char **lines, t_int_pos pos);
+int		is_wall(char **lines, t_int_pos pos);
+int		is_player(char **lines, t_int_pos pos);
+int		is_floor(char **lines, t_int_pos pos);
+int		is_map_element(char **lines, t_int_pos pos);
+/* parsing_utils.c */
+int		is_wall_element(char *s);
+int		is_fnc_element(char *s);
+int		is_str_digit(char *s);
+int		is_duplicated_element(char *s);
+int		get_file_line_no(char *map_path);
 /* exit.c */
 void	exit_error(const char *s);
 

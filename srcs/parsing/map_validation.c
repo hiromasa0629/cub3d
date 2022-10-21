@@ -6,68 +6,91 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:25 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 12:27:45 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/21 18:03:42 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-t_map_validation	init_map_validation_struct(int y, int x)
+int	is_perimeter(char **lines, int l_no, t_int_pos pos)
 {
-	t_map_validation	mv;
-	
-	mv.top.y = y - 1;
-	mv.top.x = x;
-	mv.bottom.y = y + 1;
-	mv.bottom.x = x;
-	mv.left.y = y;
-	mv.left.x = x - 1;
-	mv.right.y = y;
-	mv.right.x = x + 1;
-	mv.topleft.y = y - 1;
-	mv.topleft.x = x - 1;
-	mv.topright.y = y - 1;
-	mv.topright.x = x + 1;
-	mv.bottomleft.y = y + 1;
-	mv.bottomleft.x = x - 1;
-	mv.bottomright.y = y + 1;
-	mv.bottomright.x = x + 1;
-	return (mv);
+	if (pos.x == (ft_strlen(lines[pos.y]) - 1) || pos.x == 0 || \
+		pos.y == 0 || pos.y == l_no - 1)
+		return (1);
+	return (0);
 }
 
 int	is_valid_surrounding(char **lines, int y, int x, int l_no)
 {
-	int					has_open;
 	t_map_validation	mv;
-	(void)l_no;
-	
-	has_open = 0;
-	mv = init_map_validation_struct(y, x);
-	if (mv.top.y > 0 && (is_space(lines, mv.top) || is_player(lines, mv.top)))
+	t_int_pos			pos;
+
+	if (lines[y][x] == 'X' || lines[y][x] == '1')
+		return (1);
+	pos.y = y;
+	pos.x = x;
+	if (is_perimeter(lines, l_no, pos) || is_space(lines, pos))
 		return (0);
-	// if (mv.bottom.y < l_no && (is_space()))
-	
-	return (0);
+	lines[y][x] = 'X';
+	mv.left = is_valid_surrounding(lines, y, x - 1, l_no);
+	mv.right = is_valid_surrounding(lines, y, x + 1, l_no);
+	mv.top = is_valid_surrounding(lines, y - 1, x, l_no);
+	mv.bottom = is_valid_surrounding(lines, y + 1, x, l_no);
+	mv.topleft = is_valid_surrounding(lines, y - 1, x - 1, l_no);
+	mv.topright = is_valid_surrounding(lines, y - 1, x + 1, l_no);
+	mv.bottomleft = is_valid_surrounding(lines, y + 1, x - 1, l_no);
+	mv.bottomright = is_valid_surrounding(lines, y + 1, x + 1, l_no);
+	return (mv.top && mv.bottom && mv.left && mv.right && mv.topleft && \
+		mv.topright && mv.bottomleft && mv.bottomright);
 }
 
-int	is_valid_map(char **lines)
+int	is_valid_map_component(t_game *game, char **lines)
 {
 	t_int_pos	pos;
-	int			l_no;
-
+	t_int_pos	player_pos;
+	
 	pos.y = 0;
-	l_no = get_splits_no(lines);
+	player_pos.x = -1;
 	while (lines[pos.y])
 	{
 		pos.x = 0;
 		while (lines[pos.y][pos.x])
 		{
-			if (is_space(lines, pos) && !is_valid_surrounding(lines, pos.y, pos.x, l_no))
+			if (!is_map_element(lines, pos))
 				return (0);
+			if (is_player(lines, pos) && player_pos.x > -1)
+				return (0);
+			if (is_player(lines, pos) && player_pos.x == -1)
+				player_pos = pos;
 			pos.x++;
 		}
-		if (!is_valid_surrounding(lines, pos.y, pos.x, l_no))
-			return (0);
+		pos.y++;
+	}
+	if (player_pos.x == -1)
+		return (0);
+	game->player_pos = player_pos;
+	return (1);
+}
+
+int	is_valid_map(t_game *game, char **lines)
+{
+	t_int_pos	pos;
+	int			l_no;
+
+	if (!is_valid_map_component(game, lines))
+		return (0);
+	pos.y = 1;
+	l_no = get_splits_no(lines);
+	while (lines[pos.y])
+	{
+		pos.x = 1;
+		while (lines[pos.y][pos.x])
+		{
+			if (is_floor(lines, pos))
+				if (!is_valid_surrounding(lines, pos.y, pos.x, l_no))
+					return (0);
+			pos.x++;
+		}
 		pos.y++;
 	}
 	return (1);
