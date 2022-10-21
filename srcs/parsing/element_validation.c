@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:36:12 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/20 21:55:34 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/21 12:10:19 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	is_asset_exist(char *file)
 	int	fd;
 	
 	fd = open(file, O_RDONLY);
+	// printf("file: %s\n", file);
 	if (fd < 0)
 		return (0);
 	return (1);
@@ -85,9 +86,11 @@ int	is_valid_line(char *line)
 		has_err = 1;
 	if (!has_err && !is_wall_element(splits[0]) && !is_fnc_element(splits[0]))
 		has_err = 1;
-	if (!has_err && is_wall_element(splits[0]) && !is_asset_exist(splits[1]))
+	if (!has_err && is_wall_element(splits[0]) && (!is_asset_exist(splits[1]) || \
+		is_duplicated_element(splits[0])))
 		has_err = 1;
-	if (!has_err && is_fnc_element(splits[0]) && !is_valid_color(splits[1]))
+	if (!has_err && is_fnc_element(splits[0]) && (!is_valid_color(splits[1]) || \
+		is_duplicated_element(splits[0])))
 		has_err = 1;
 	free_splits(splits);
 	if (has_err)

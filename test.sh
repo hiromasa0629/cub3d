@@ -11,13 +11,18 @@ INVALID_FILES=(\
 	"invalid_el(color_format).cub" \
 	"invalid_el(color_overflow).cub" \
 	"invalid_el(element).cub" \
-	"invalid_el(map_order).cub"
+	"invalid_el(map_order).cub" \
+	"invalid_el(dup).cub"
 )
 	
 exe() {
 	echo ${RED}"${PROG} $@"${NC} ; ${PROG} $@ ;
 }
 
-for str in ${INVALID_FILES[@]}; do
-	exe ./maps/${str}
-done
+if [ "$1" = "" ]; then
+	for str in ${INVALID_FILES[@]}; do
+		exe ./maps/${str}
+	done
+elif [ "$1" = "default" ]; then
+	exe ./maps/default.cub
+fi
