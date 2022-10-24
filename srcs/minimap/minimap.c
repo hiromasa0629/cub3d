@@ -299,17 +299,17 @@ int deal_key(int key, t_game *game)
 	return (0);
 }
 
-int main(void)
-{
-	t_game game;
-	// t_minimap *minimap;
+// int main(void)
+// {
+// 	t_game game;
+// 	// t_minimap *minimap;
 
-	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 1920, 1080, "cub3D");
-	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
-	init_minimap(game.minimap, true);
-	display_minimap(&game, game.minimap);
-	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
-	mlx_key_hook(game.win, deal_key, &game);
-	mlx_loop(game.mlx);
-}
+// 	game.mlx = mlx_init();
+// 	game.win = mlx_new_window(game.mlx, 1920, 1080, "cub3D");
+// 	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
+// 	init_minimap(game.minimap, true);
+// 	display_minimap(&game, game.minimap);
+// 	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
+// 	mlx_key_hook(game.win, deal_key, &game);
+// 	mlx_loop(game.mlx);
+// }
