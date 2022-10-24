@@ -4,6 +4,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include "minimap.h"
+#include "main.h"
 
 /* display minimap player in center (N, S, E or W)
  ** get map start x and y
@@ -184,6 +185,7 @@ t_matrix centralize(t_matrix matrix, t_minimap *minimap)
 	matrix.y1 -= minimap->start_y;
 	return (matrix);
 }
+
 void dda(t_matrix matrix, t_minimap *minimap)
 {
 	double x_step;
@@ -238,7 +240,7 @@ void display_minimap(t_game *game, t_minimap *minimap)
 {
 	minimap->map.img = mlx_new_image(game->mlx, minimap->width, minimap->height);
 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
-										  &minimap->map.endian);
+										&minimap->map.endian);
 	draw_minimap(minimap);
 	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
 	printf("player x: %f\t player y: %f\n", minimap->player_pos.x0, minimap->player_pos.x1);
@@ -254,7 +256,7 @@ void player_movement(int key, t_game *game)
 {
 	t_minimap *minimap = game->minimap;
 	printf("key: %d\n", key);
-	if (key == 123)
+	if (key == LEFT_BTN)
 	{
 		minimap->player_angle -= 0.1;
 		if (minimap->player_angle < 0)
@@ -265,7 +267,7 @@ void player_movement(int key, t_game *game)
 		minimap->player_pos.y1 = minimap->player_pos.y0 + minimap->player_delta_y;
 		// minimap->player_pos.x0 -= 0.25;
 	}
-	else if (key == 124)
+	else if (key == RIGHT_BTN)
 	{
 		minimap->player_angle += 0.1;
 		if (minimap->player_angle > 2 * PI)
@@ -276,7 +278,7 @@ void player_movement(int key, t_game *game)
 		minimap->player_pos.y1 = minimap->player_pos.y0 + minimap->player_delta_y;
 		// minimap->player_pos.x1 += 0.25;
 	}
-	else if (key == 125)
+	else if (key == W_BTN)
 	{
 		minimap->player_pos.x0 += (minimap->player_delta_x / 5);
 		minimap->player_pos.y0 += (minimap->player_delta_y / 5);
@@ -284,7 +286,7 @@ void player_movement(int key, t_game *game)
 		minimap->player_pos.y1 += (minimap->player_delta_y / 5);
 		// minimap->player_pos.y0 += 0.25;
 	}
-	else
+	else if (key == S_BTN)
 	{
 		minimap->player_pos.x0 -= (minimap->player_delta_x / 5);
 		minimap->player_pos.y0 -= (minimap->player_delta_y / 5);
@@ -296,7 +298,7 @@ void player_movement(int key, t_game *game)
 	mlx_clear_window(game->mlx, game->win);
 	minimap->map.img = mlx_new_image(game->mlx, 200, 200);
 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
-										  &minimap->map.endian);
+										&minimap->map.endian);
 	init_minimap(minimap, false);
 	draw_minimap(minimap);
 	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
@@ -313,17 +315,17 @@ int deal_key(int key, t_game *game)
 	return (0);
 }
 
-// int main(void)
-// {
-// 	t_game game;
-// 	// t_minimap *minimap;
+int main(void)
+{
+	t_game game;
+	// t_minimap *minimap;
 
-// 	game.mlx = mlx_init();
-// 	game.win = mlx_new_window(game.mlx, 1920, 1080, "cub3D");
-// 	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
-// 	init_minimap(game.minimap, true);
-// 	display_minimap(&game, game.minimap);
-// 	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
-// 	mlx_key_hook(game.win, deal_key, &game);
-// 	mlx_loop(game.mlx);
-// }
+	game.mlx = mlx_init();
+	game.win = mlx_new_window(game.mlx, 1024, 720, "cub3D");
+	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
+	init_minimap(game.minimap, true);
+	display_minimap(&game, game.minimap);
+	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
+	mlx_key_hook(game.win, deal_key, &game);
+	mlx_loop(game.mlx);
+}
