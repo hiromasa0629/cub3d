@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/24 16:37:45 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/24 21:35:42 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef	struct s_int_pos		t_int_pos;
 typedef struct s_img			t_img;
 typedef struct s_color			t_color;
 typedef struct s_minimap		t_minimap;
+typedef struct s_matrix			t_matrix;
 
 struct s_color {
 	int	r;
@@ -64,6 +65,34 @@ struct s_map_validation {
 	int	bottomright;
 };
 
+struct s_matrix
+{
+	double x0;
+	double x1;
+	double y0;
+	double y1;
+};
+
+struct s_minimap
+{
+	int			width;
+	int 		height;
+	double 		start_x;
+	double 		start_y;
+	t_matrix	player_pos;
+	double 		scale;
+	double 		player_delta_x;
+	double 		player_delta_y;
+	double 		player_angle;
+	t_img 		map;
+	int			line_len;
+	int			block_size;
+	t_img		wall05;
+	t_img		floor05;
+	int			pxmove;
+};
+
+
 struct s_game {
 	void	*mlx;
 	void	*win;
@@ -77,7 +106,7 @@ struct s_game {
 	int			map_width;
 	int			map_height;
 	t_int_pos	player_pos;
-	t_minimap	*minimap;
+	t_minimap	minimap;
 };
 
 #endif

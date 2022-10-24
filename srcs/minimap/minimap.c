@@ -321,7 +321,7 @@ int main(void)
 	// t_minimap *minimap;
 
 	game.mlx = mlx_init();
-	game.win = mlx_new_window(game.mlx, 1024, 720, "cub3D");
+	game.win = mlx_new_window(game.mlx, 1240, 720, "cub3D");
 	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
 	init_minimap(game.minimap, true);
 	display_minimap(&game, game.minimap);

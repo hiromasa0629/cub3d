@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/10/24 17:46:37 by hyap             ###   ########.fr        #
+#    Updated: 2022/10/24 20:53:22 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -24,7 +24,7 @@ LIBMLX = libmlx.dylib
 FSANITIZE = -fsanitize=address 
 NAME = cub3d
 RM = rm -f
-MINIMAP = srcs/minimap/*.c
+MINIMAP = srcs/minimap/minimaptmp.c
 
 all: ${NAME}
 

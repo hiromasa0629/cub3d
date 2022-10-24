@@ -1,5 +1,7 @@
 {
 	"files.associations": {
-		"stdlib.h": "c"
+		"*.tpp": "cpp",
+		"stdlib.h": "c",
+		"container.h": "c"
 	}
 }
