@@ -6,7 +6,7 @@
 /*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 14:12:57 by yang             ###   ########.fr       */
+/*   Updated: 2022/10/24 13:30:53 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ typedef struct s_map_validation	t_map_validation;
 typedef	struct s_int_pos		t_int_pos;
 typedef struct s_img			t_img;
 typedef struct s_color			t_color;
+typedef struct s_minimap		t_minimap;
 
 struct s_color {
 	int	r;
@@ -44,8 +45,7 @@ struct s_game {
 	t_img	wall_SO;
 	t_img	wall_EA;
 	t_img	wall_WE;
-	
-	
+	t_minimap	*minimap;
 };
 /* For checking duplicated elements 
 	by defining a static struct
