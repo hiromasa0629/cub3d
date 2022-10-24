@@ -64,29 +64,25 @@ void	get_start_pt(t_minimap *minimap, double x, double y)
 
 void set_player_direction(char c, t_int_pos pos, t_minimap *minimap)
 {
-	printf("in setting: x: %d\t y: %d\n", pos.x, pos.y);
-	t_matrix player_pos;
-
-	player_pos = minimap->player_pos;
-	player_pos.x0 = pos.x;
-	player_pos.y0 = pos.y;
+	minimap->player_pos.x0 = (double)pos.x;
+	minimap->player_pos.y0 = (double)pos.y;
 	if (c == 'N' || c == 'S')
 	{
-		player_pos.y1 = player_pos.y0;
+		minimap->player_pos.x1 = minimap->player_pos.x0;
 		if (c == 'N')
-			player_pos.x1 = player_pos.x0 - (double)(minimap->line_len);
+			minimap->player_pos.y1 = minimap->player_pos.y0 - (double)(minimap->line_len);
 		else
-			player_pos.x1 = player_pos.x0 + (double)(minimap->line_len);
+			minimap->player_pos.y1 = minimap->player_pos.y0 + (double)(minimap->line_len);
 	}
 	else if (c == 'W' || c == 'E')
 	{
-		player_pos.x1 = player_pos.x0;
+		minimap->player_pos.y1 = minimap->player_pos.y0;
 		if (c == 'W')
-			player_pos.y1 = player_pos.y0 - (double)(minimap->line_len);
+			minimap->player_pos.x1 = minimap->player_pos.x0 - (double)(minimap->line_len);
 		else
-			player_pos.y1 = player_pos.y0 + (double)(minimap->line_len);
+			minimap->player_pos.x1 = minimap->player_pos.x0 + (double)(minimap->line_len);
 	}
-	printf("in setting: x: %d\t y: %d\n", pos.x, pos.y);
+	// printf("x0: %f\t x1: %f\t y0: %f\t y1: %f\n", minimap->player_pos.x0, minimap->player_pos.x1, minimap->player_pos.y0, minimap->player_pos.y1);
 }
 
 void init_minimap(t_minimap *minimap, bool first)
@@ -180,12 +176,21 @@ t_matrix	scale(t_matrix matrix, t_minimap *minimap)
 	return (matrix);
 }
 
+t_matrix centralize(t_matrix matrix, t_minimap *minimap)
+{
+	matrix.x0 -= minimap->start_x;
+	matrix.x1 -= minimap->start_x;
+	matrix.y0 -= minimap->start_y;
+	matrix.y1 -= minimap->start_y;
+	return (matrix);
+}
 void dda(t_matrix matrix, t_minimap *minimap)
 {
 	double x_step;
 	double y_step;
 	double max;
 
+	matrix = centralize(matrix, minimap);
 	matrix = scale(matrix, minimap);
 	x_step = matrix.x1 - matrix.x0;
 	y_step = matrix.y1 - matrix.y0;
@@ -248,37 +253,46 @@ void close_win(t_game *game)
 void player_movement(int key, t_game *game)
 {
 	t_minimap *minimap = game->minimap;
-
+	printf("key: %d\n", key);
 	if (key == 123)
 	{
-		// minimap->player_angle -= 0.1;
-		// if (minimap->player_angle < 0)
-		// 	minimap->player_angle += 2 * PI;
-		// minimap->player_delta_x = cos(minimap->player_angle) * 5;
-		// minimap->player_delta_y = sin(minimap->player_angle) * 5;
-		minimap->player_pos.x0 -= 0.25;
+		minimap->player_angle -= 0.1;
+		if (minimap->player_angle < 0)
+			minimap->player_angle += 2 * PI;
+		minimap->player_delta_x = cos(minimap->player_angle) * minimap->line_len;
+		minimap->player_delta_y = sin(minimap->player_angle) * minimap->line_len;
+		minimap->player_pos.x1 = minimap->player_pos.x0 + minimap->player_delta_x;
+		minimap->player_pos.y1 = minimap->player_pos.y0 + minimap->player_delta_y;
+		// minimap->player_pos.x0 -= 0.25;
 	}
 	else if (key == 124)
 	{
-		// minimap->player_angle += 0.1;
-		// if (minimap->player_angle > 2 * PI)
-		// 	minimap->player_angle -= 2 * PI;
-		// minimap->player_delta_x = cos(minimap->player_angle) * 5;
-		// minimap->player_delta_y = sin(minimap->player_angle) * 5;
-		minimap->player_pos.x1 += 0.25;
+		minimap->player_angle += 0.1;
+		if (minimap->player_angle > 2 * PI)
+			minimap->player_angle -= 2 * PI;
+		minimap->player_delta_x = cos(minimap->player_angle) * minimap->line_len;
+		minimap->player_delta_y = sin(minimap->player_angle) * minimap->line_len;
+		minimap->player_pos.x1 = minimap->player_pos.x0 + minimap->player_delta_x;
+		minimap->player_pos.y1 = minimap->player_pos.y0 + minimap->player_delta_y;
+		// minimap->player_pos.x1 += 0.25;
 	}
 	else if (key == 125)
 	{
-		// minimap->player_pos.x0 += minimap->player_delta_x;
-		// minimap->player_pos.y0 += minimap->player_delta_y;
-		minimap->player_pos.y0 += 0.25;
+		minimap->player_pos.x0 += (minimap->player_delta_x / 5);
+		minimap->player_pos.y0 += (minimap->player_delta_y / 5);
+		minimap->player_pos.x1 += (minimap->player_delta_x / 5);
+		minimap->player_pos.y1 += (minimap->player_delta_y / 5);
+		// minimap->player_pos.y0 += 0.25;
 	}
 	else
 	{
-		// minimap->player_pos.x0 -= minimap->player_delta_x;
-		// minimap->player_pos.y0 -= minimap->player_delta_y;
-		minimap->player_pos.y1 -= 0.25;
+		minimap->player_pos.x0 -= (minimap->player_delta_x / 5);
+		minimap->player_pos.y0 -= (minimap->player_delta_y / 5);
+		minimap->player_pos.x1 -= (minimap->player_delta_x / 5);
+		minimap->player_pos.y1 -= (minimap->player_delta_y / 5);
+		// minimap->player_pos.y1 -= 0.25;
 	}
+	printf("delta x: %f\t delta y: %f\n", minimap->player_delta_x, minimap->player_delta_y);
 	mlx_clear_window(game->mlx, game->win);
 	minimap->map.img = mlx_new_image(game->mlx, 200, 200);
 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
