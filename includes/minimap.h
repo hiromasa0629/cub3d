@@ -6,7 +6,7 @@
 /*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 14:30:03 by yang              #+#    #+#             */
-/*   Updated: 2022/10/24 16:00:18 by yang             ###   ########.fr       */
+/*   Updated: 2022/10/26 15:20:55 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,17 +27,19 @@ typedef struct s_matrix
 
 typedef struct s_minimap
 {
-	int			width;
-	int 		height;
 	double 		start_x;
 	double 		start_y;
-	t_matrix	player_pos;
+	t_matrix	player_pos; // player_pos to facing direction
+	int			line_len;
 	double 		scale;
 	double 		player_delta_x;
 	double 		player_delta_y;
-	double 		player_angle;
+	double 		player_angle; // in degree
 	t_img 		map;
-	int			line_len;
+	t_img		floor;
+	t_img		wall;
 } t_minimap;
+
+double deg_to_rad(double degree);
 
 #endif
