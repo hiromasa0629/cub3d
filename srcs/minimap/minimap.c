@@ -254,7 +254,7 @@ void close_win(t_game *game)
 
 void player_movement(int key, t_game *game)
 {
-	t_minimap *minimap = game->minimap;
+	t_minimap *minimap = &(game->minimap);
 	printf("key: %d\n", key);
 	if (key == LEFT_BTN)
 	{
@@ -278,7 +278,7 @@ void player_movement(int key, t_game *game)
 		minimap->player_pos.y1 = minimap->player_pos.y0 + minimap->player_delta_y;
 		// minimap->player_pos.x1 += 0.25;
 	}
-	else if (key == W_BTN)
+	else if (key == 126)
 	{
 		minimap->player_pos.x0 += (minimap->player_delta_x / 5);
 		minimap->player_pos.y0 += (minimap->player_delta_y / 5);
@@ -286,7 +286,7 @@ void player_movement(int key, t_game *game)
 		minimap->player_pos.y1 += (minimap->player_delta_y / 5);
 		// minimap->player_pos.y0 += 0.25;
 	}
-	else if (key == S_BTN)
+	else if (key == 125)
 	{
 		minimap->player_pos.x0 -= (minimap->player_delta_x / 5);
 		minimap->player_pos.y0 -= (minimap->player_delta_y / 5);
@@ -322,10 +322,10 @@ int main(void)
 
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, 1240, 720, "cub3D");
-	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
-	init_minimap(game.minimap, true);
-	display_minimap(&game, game.minimap);
-	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
+	// game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
+	init_minimap(&(game.minimap), true);
+	display_minimap(&game,&(game.minimap));
+	mlx_put_image_to_window(game.mlx, game.win, game.minimap.map.img, 0, 0);
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_loop(game.mlx);
 }

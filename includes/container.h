@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/24 21:35:42 by hyap             ###   ########.fr       */
+/*   Updated: 2022/10/31 12:27:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ typedef struct s_img			t_img;
 typedef struct s_color			t_color;
 typedef struct s_minimap		t_minimap;
 typedef struct s_matrix			t_matrix;
+typedef struct s_player			t_player;
+typedef struct s_double_pos		t_double_pos;
 
 struct s_color {
 	int	r;
@@ -86,17 +88,44 @@ struct s_minimap
 	double 		player_angle;
 	t_img 		map;
 	int			line_len;
+	int			tile_size;
 	int			block_size;
 	t_img		wall05;
 	t_img		floor05;
+	t_img		player05;
 	int			pxmove;
+	int			even_tiles;
+	t_int_pos	start_pos;
+	t_int_pos	px_start_pos;
+	t_int_pos	px_player_pos;
+	int			nx_tiles;
+	int			ny_tiles;
+};
+
+typedef struct	s_mini {
+	t_int_pos	start_pos;
+	t_int_pos	pos;
+	t_int_pos	pxpos;
+	t_img		img;
+}	t_mini;
+
+struct s_double_pos {
+	double	x;
+	double	y;
+};
+
+struct s_player {
+	t_double_pos	pos;
+	t_int_pos		tile_pos;
+	t_double_pos	dir;
+	t_double_pos	moved;
 };
 
 
 struct s_game {
-	void	*mlx;
-	void	*win;
-	char	**map;
+	void		*mlx;
+	void		*win;
+	char		**map;
 	t_img		wall_NO;
 	t_img		wall_SO;
 	t_img		wall_EA;
@@ -105,7 +134,7 @@ struct s_game {
 	t_color		color_C;
 	int			map_width;
 	int			map_height;
-	t_int_pos	player_pos;
+	t_player	player;
 	t_minimap	minimap;
 };
 
