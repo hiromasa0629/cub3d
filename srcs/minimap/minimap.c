@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minimap.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/02 18:59:45 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/03 20:08:06 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -240,7 +240,7 @@ void draw_minimap(t_minimap *minimap)
 		extra_y = 1;
 	while (pos.y < (int)(minimap->height + minimap->start_y + extra_y))
 	{
-		printf("pos.y: %d\t condition: %f\n", pos.y, minimap->height + minimap->start_y + extra_y);
+		// printf("pos.y: %d\t condition: %f\n", pos.y, minimap->height + minimap->start_y + extra_y);
 		pos.x = minimap->start_x;
 		if (pixel.y0 == 0 && (minimap->start_y - (int)minimap->start_y))
 			pixel.y1 = ((1.0 - (minimap->start_y - (int)minimap->start_y)) * minimap->scale) - 1;
@@ -296,11 +296,10 @@ void display_minimap(t_game *game, t_minimap *minimap)
 	minimap->map.img = mlx_new_image(game->mlx, minimap->screen_width, minimap->screen_height);
 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
 										  &minimap->map.endian);
-	minimap->map_3d.img = mlx_new_image(game->mlx, 800, 800);
+	minimap->map_3d.img = mlx_new_image(game->mlx, 1000, 1000);
 	minimap->map_3d.addr = mlx_get_data_addr(minimap->map_3d.img, &minimap->map_3d.bpp, &minimap->map_3d.size,
 											 &minimap->map_3d.endian);
 	draw_minimap(minimap);
-	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
 }
 
 void close_win(t_game *game)
@@ -359,7 +358,7 @@ void player_movement(int key, t_game *game)
 	minimap->map.img = mlx_new_image(game->mlx, 200, 200);
 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
 										  &minimap->map.endian);
-	minimap->map_3d.img = mlx_new_image(game->mlx, 800, 800);
+	minimap->map_3d.img = mlx_new_image(game->mlx, 1000, 1000);
 	minimap->map_3d.addr = mlx_get_data_addr(minimap->map_3d.img, &minimap->map_3d.bpp, &minimap->map_3d.size,
 											 &minimap->map_3d.endian);
 	init_minimap(minimap, false);
@@ -388,7 +387,8 @@ int main(void)
 	display_minimap(&game, game.minimap);
 	// mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
 	draw_3D(&game, game.minimap);
-	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map_3d.img, 200, 200);
+	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map_3d.img, 0, 0);
+	mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);
 	mlx_key_hook(game.win, deal_key, &game);
 	mlx_loop(game.mlx);
 }
