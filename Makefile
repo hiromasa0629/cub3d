@@ -6,11 +6,11 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/11/03 20:19:12 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/05 18:23:30 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-# SRCS = ${wildcard srcs/*.c} ${wildcard gnl/*.c} ${wildcard srcs/utils/*.c} ${wildcard srcs/parsing/*.c}
+SRCS = ${wildcard srcs/*.c} ${wildcard gnl/*.c} ${wildcard srcs/utils/*.c} ${wildcard srcs/parsing/*.c}
 
 SRCS = srcs/minimap/*.c
 

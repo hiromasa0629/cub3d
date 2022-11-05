@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 18:07:46 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 18:22:18 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ struct s_game {
 	t_img		wall_WE;
 	t_int_pos	map_size;
 	t_minimap	*minimap;
+	t_int_pos	player_pos;
 };
 
 /* For checking duplicated elements 
@@ -77,14 +78,14 @@ struct s_elements {
 };
 /* For checking space surrounding */
 struct s_map_validation {
-	t_int_pos	top;
-	t_int_pos	bottom;
-	t_int_pos	left;
-	t_int_pos	right;
-	t_int_pos	topleft;
-	t_int_pos	topright;
-	t_int_pos	bottomleft;
-	t_int_pos	bottomright;
+	int	top;
+	int	bottom;
+	int	left;
+	int	right;
+	int	topleft;
+	int	topright;
+	int	bottomleft;
+	int	bottomright;
 };
 
 #endif

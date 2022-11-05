@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:34:31 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 18:08:03 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 18:21:50 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,6 @@ int	store_color_value(int *color, char *line)
 	res = (res << 8) + g;
 	res = (res << 8) + b;
 	free_splits(splits);
-	
 	return (res);
 }
 
