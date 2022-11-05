@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 14:44:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 18:07:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,19 @@ struct s_texture {
 };
 
 struct s_game {
-	void	*mlx;
-	void	*win;
-	char	**map;
-	t_img	wall_NO;
-	t_img	wall_SO;
-	t_img	wall_EA;
-	t_img	wall_WE;
+	void		*mlx;
+	void		*win;
+	char		**map;
+	int			f_color;
+	int			c_color;
+	t_img		wall_NO;
+	t_img		wall_SO;
+	t_img		wall_EA;
+	t_img		wall_WE;
+	t_int_pos	map_size;
 	t_minimap	*minimap;
 };
+
 /* For checking duplicated elements 
 	by defining a static struct
 */

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 11:24:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 17:49:32 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ void	free_splits(char **splits);
 /* utils.c */
 int		ft_strncmp(const char *s1, const char *s2, size_t n);
 int		ft_atoi(const char *s);
+int		ft_strcmp(const char *s1, const char *s2);
 /* map_utils.c */
 int	is_space(char **lines, t_int_pos pos);
 int	is_wall(char **lines, t_int_pos pos);

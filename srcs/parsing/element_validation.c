@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:36:12 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/21 12:10:19 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 17:51:03 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	validate_extension(char *map_path)
 	}
 	if (!file[i])
 		exit_error("Missing extension !\n");
-	if (ft_strncmp(&file[++i], "cub", 3) != 0)
+	if (ft_strcmp(&file[++i], "cub") != 0)
 		exit_error("Invalid extension !\n");
 }
 
