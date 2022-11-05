@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yang <yang@student.42.fr>                  +#+  +:+       +#+         #
+#    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/10/26 16:13:36 by yang             ###   ########.fr        #
+#    Updated: 2022/11/03 20:19:12 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,7 @@ RM = rm -f
 all: ${NAME}
 
 ${NAME}: ${SRCS}
-	${CC} -I includes ${SRCS} ${LIBMLX} -o ${NAME}
+	${CC} -I includes ${FSANITIZE} ${SRCS} ${LIBMLX} -o ${NAME}
 
 clean:
 	${RM} ${NAME}

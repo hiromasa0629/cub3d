@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/03 20:09:46 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 16:09:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #define h 1000
 #define MAP_WIDTH 15.0
 #define MAP_HEIGHT 15.0
+#define TEXSIZE 64
 
 char *map_1[15] = {
 	"111111111111111", // 0
@@ -45,11 +46,23 @@ void dda(t_matrix matrix, t_minimap *minimap, int color);
 double get_max(double x_step, double y_step);
 void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
-void dda_ver(t_matrix matrix, t_minimap *minimap, int color)
+uint32_t	get_tex_color(t_img *data, int x, int y)
+{
+	char *dst;
+
+	dst = data->addr + (y * data->size + x * (data->bpp / 8));
+	return (*(uint32_t *)dst);
+}
+
+void dda_ver(t_matrix matrix, t_minimap *minimap, t_texture texture)
 {
 	int y = (int)matrix.y0;
+	uint32_t	color;
 	while (y < (int)matrix.y1)
 	{
+		texture.tex_pos.y = (int)texture.tex_start & (TEXSIZE - 1);
+		texture.tex_start += texture.step;
+		color = get_tex_color(&(texture.img), texture.tex_pos.x, texture.tex_pos.y);
 		my_mlx_pixel_put(&minimap->map_3d, (int)matrix.x0, y, color);
 		y++;
 	}
@@ -58,6 +71,7 @@ void dda_ver(t_matrix matrix, t_minimap *minimap, int color)
 void draw_3D(t_game *game, t_minimap *minimap)
 {
 	int x = -1;
+	t_matrix draw_ray;
 	while (++x < STRIPE)
 	{
 		double angle;
@@ -66,28 +80,14 @@ void draw_3D(t_game *game, t_minimap *minimap)
 			angle += 360.0;
 		else if (angle > 360.0)
 			angle -= 360.0;
-		// printf("angle: %f\n", angle);
 		double rayDirX = cos(deg_to_rad(angle));
 		double rayDirY = sin(deg_to_rad(angle));
-		// printf("\nrayDirX: %f\t rayDirY: %f\n", rayDirX, rayDirY);
-		// t_matrix draw_ray;
-		// draw_ray.x0 = minimap->player_pos.x0;
-		// draw_ray.y0 = minimap->player_pos.y0;
-		// draw_ray.x1 = draw_ray.x0 + ((rayDirX)*5);
-		// draw_ray.y1 = draw_ray.y0 - ((rayDirY)*5);
-		// dda(draw_ray, minimap, 0xFF0000);
 		int mapX = (int)minimap->player_pos.x0; // need to know the exact player pos (0.x? and facing direction to get exact starting point)
 		int mapY = (int)minimap->player_pos.y0;
-		// printf("mapX: %d\t mapY: %d\n", mapX, mapY);
-		// printf("mapX: %d\t mapY: %d\n", mapX, mapY);
 		double sideDistX;
 		double sideDistY;
-		// double deltaDistX = (rayDirX == 0) ? 1e30 : fabs(1 / rayDirX);
-		// double deltaDistY = (rayDirY == 0) ? 1e30 : fabs(1 / rayDirY);
 		double deltaDistX = (rayDirX == 0) ? 1e30 : sqrt(1 + (rayDirY * rayDirY) / (rayDirX * rayDirX));
 		double deltaDistY = (rayDirY == 0) ? 1e30 : sqrt(1 + (rayDirX * rayDirX) / (rayDirY * rayDirY));
-		// printf("player X: %f\t Y: %f\n", minimap->player_pos.x0, minimap->player_pos.y0);
-		// printf("deltaDistX: %f\t deltaDistY: %f\n", deltaDistX, deltaDistY);
 		double perpWallDist;
 		int stepX;
 		int stepY;
@@ -118,23 +118,8 @@ void draw_3D(t_game *game, t_minimap *minimap)
 			sideDistY = (minimap->player_pos.y0 - mapY) * deltaDistY;
 			ray_deduct_y = 1;
 		}
-		// if (sideDistX == 0)
-		// 	sideDistX += deltaDistX;
-		// if (sideDistY == 0)
-		// 	sideDistY += deltaDistY;
-		// printf("sideDistX: %f\t sideDistY: %f\n", sideDistX, sideDistY);
 		while (mapX >= 0 && mapX < MAP_WIDTH && mapY >= 0 && mapY <= MAP_HEIGHT && hit == 0)
 		{
-			// printf("mapX: %d\t mapY: %d\n", mapX, mapY);
-			// jump to next map square, either in x-direction, or in y-direction
-			// printf("****checking map****\n");
-			// printf("sideDistX: %f\t sideDistY: %f\n", sideDistX, sideDistY);
-			// if (sideDistX == 0.0 && sideDistY == 0.0)
-			// {
-			// 	printf("enter here\n");
-			// 	sideDistX = deltaDistX;
-			// 	sideDistY = deltaDistY;
-			// }
 			if (sideDistX < sideDistY)
 			{
 				sideDistX += deltaDistX;
@@ -147,18 +132,13 @@ void draw_3D(t_game *game, t_minimap *minimap)
 				mapY += stepY;
 				side = 1;
 			}
-			// printf("map: %c\t x: %d\t y: %d\n", map_1[mapY][mapX], mapX, mapY);
 			if (map_1[mapY][mapX] == '1')
 			{
 				hit = 1;
 				double dist;
-				t_matrix draw_ray;
+			
 				draw_ray.x0 = minimap->player_pos.x0;
 				draw_ray.y0 = minimap->player_pos.y0;
-				// if (side == 1)
-				// 	dist = fabs(mapX - draw_ray.x0 + 1) * deltaDistX;
-				// else
-				// 	dist = fabs(mapY - draw_ray.y0 + 1) * deltaDistY;
 				if (side == 0)
 				{
 					draw_ray.x1 = draw_ray.x0 + (rayDirX * fabs(mapX - draw_ray.x0 + ray_deduct_x) * deltaDistX);
@@ -170,9 +150,6 @@ void draw_3D(t_game *game, t_minimap *minimap)
 					draw_ray.y1 = draw_ray.y0 - (rayDirY * fabs(mapY - draw_ray.y0 + ray_deduct_y) * deltaDistY);
 				}
 				dda(draw_ray, minimap, 0x00FF00);
-				// printf("x: %d\t hit!!\n", x);
-				// printf("is side: %d\n", side);
-				// printf("mapX: %d\t mapY: %d\n", mapX, mapY);
 			}
 		}
 		if (side == 0)
@@ -186,27 +163,38 @@ void draw_3D(t_game *game, t_minimap *minimap)
 			ca -= 360.0;
 		int lineHeight = (int)(h / (perpWallDist * cos(deg_to_rad(ca))));
 
-		// calculate lowest and highest pixel to fill in current stripe
-		// printf("perpWallDist: %f\t lineHeight: %d\n", perpWallDist, lineHeight);
 		int drawStart = -lineHeight / 2 + h / 2;
 		if (drawStart < 0)
 			drawStart = 0;
 		int drawEnd = lineHeight / 2 + h / 2;
 		if (drawEnd >= h)
 			drawEnd = h - 1;
-		// printf("drawStart: %d\t drawEnd: %d\n", drawStart, drawEnd);
 		int color = 0x0000FF;
 		if (side == 1)
-		{
 			color /= 2;
-		}
+		
+		
+		t_texture	texture;
+		texture.step = 1.0 * TEXSIZE / lineHeight;
+		double wallX;
+		
+		if (side == 0) wallX = minimap->player_pos.y0 + perpWallDist * rayDirY;
+		else wallX = minimap->player_pos.x0 + perpWallDist * rayDirX;
+		wallX -= (int)wallX;
+		texture.tex_pos.x = (int)(wallX * (double)TEXSIZE);
+		if (side == 0 && rayDirX > 0.0) 
+			texture.tex_pos.x = TEXSIZE - texture.tex_pos.x - 1;
+		if (side == 1 && rayDirY < 0.0) 
+			texture.tex_pos.x = TEXSIZE - texture.tex_pos.x - 1;
+		texture.tex_start = (drawStart - h / 2 + lineHeight / 2) * texture.step;
+		texture.img = game->wall_EA;
 		t_matrix draw;
-		draw.x0 = x; //* (800 / STRIPE);
-		// draw.x1 = draw.x0;
+		draw.x0 = x;
 		draw.y0 = drawStart;
 		draw.y1 = drawEnd;
-		dda_ver(draw, minimap, color);
+		dda_ver(draw, minimap, texture);
 	}
-	// my_mlx_pixel_put(&minimap->map_3d, 100, 100, 0xFFFFFF);
 	mlx_put_image_to_window(game->mlx, game->win, minimap->map_3d.img, 0, 0);
 }
+
+

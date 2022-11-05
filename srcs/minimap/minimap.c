@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/03 20:08:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 16:31:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,7 +215,7 @@ void dda(t_matrix matrix, t_minimap *minimap, int color)
 	max = get_max(x_step, y_step);
 	x_step /= max;
 	y_step /= max;
-	while (((int)(matrix.x0 - matrix.x1) || (int)(matrix.y0 - matrix.y1)) && matrix.x0 <= MI_SCREEN_WIDTH && matrix.y0 <= MI_SCREEN_HEIGHT)
+	while (((int)(matrix.x0 - matrix.x1) || (int)(matrix.y0 - matrix.y1)) && matrix.x0 < MI_SCREEN_WIDTH && matrix.y0 < MI_SCREEN_HEIGHT && matrix.x0 > 0 && matrix.y0 > 0)
 	{
 		my_mlx_pixel_put(&minimap->map, matrix.x0, matrix.y0, color);
 		matrix.x0 += x_step;
@@ -240,7 +240,6 @@ void draw_minimap(t_minimap *minimap)
 		extra_y = 1;
 	while (pos.y < (int)(minimap->height + minimap->start_y + extra_y))
 	{
-		// printf("pos.y: %d\t condition: %f\n", pos.y, minimap->height + minimap->start_y + extra_y);
 		pos.x = minimap->start_x;
 		if (pixel.y0 == 0 && (minimap->start_y - (int)minimap->start_y))
 			pixel.y1 = ((1.0 - (minimap->start_y - (int)minimap->start_y)) * minimap->scale) - 1;
@@ -261,8 +260,6 @@ void draw_minimap(t_minimap *minimap)
 				pixel.x1 = pixel.x0 + minimap->scale - 1;
 			if (map[pos.y][pos.x] == '1')
 				color = 0x58D68D;
-			// else if (map[pos.y][pos.x] == '0' || (map[pos.y][pos.x] == 'N' || map[pos.y][pos.x] == 'S' || map[pos.y][pos.x] == 'E' || map[pos.y][pos.x] == 'W'))
-			// 	color = 0xFFFFFF;
 			else if (map[pos.y][pos.x] == ' ')
 				color = 0x0000FF;
 			else
@@ -339,17 +336,9 @@ void player_movement(int key, t_game *game)
 	else if (key == 0 || key == 2) // 0 = left, 2 == right
 	{
 		if (key == 0)
-		{
 			angle = (int)(minimap->player_angle + 90) % 360;
-			// if (angle > 360)
-			// 	angle -= 360;
-		}
 		else
-		{
 			angle = (int)(minimap->player_angle - 90) % 360;
-			// if (angle < 0)
-			// 	angle += 360;
-		}
 		minimap->player_pos.x0 += cos(deg_to_rad(angle)) * PLAYER_STEP;
 		minimap->player_pos.y0 -= sin(deg_to_rad(angle)) * PLAYER_STEP;
 	}
@@ -376,13 +365,21 @@ int deal_key(int key, t_game *game)
 	return (0);
 }
 
+
+
 int main(void)
 {
 	t_game game;
+	int		i;
+	int		j;
 
 	game.mlx = mlx_init();
 	game.win = mlx_new_window(game.mlx, 1000, 1000, "cub3D");
 	game.minimap = (t_minimap *)malloc(sizeof(t_minimap));
+	game.wall_EA.img = mlx_xpm_file_to_image(game.mlx, "./assets/wall.xpm", &i, &j);
+	game.wall_EA.addr = mlx_get_data_addr(game.wall_EA.img, &(game.wall_EA.bpp), &(game.wall_EA.size), &(game.wall_EA.endian));
+	
+	printf("bpp: %d, size_len: %d, endian: %d\n", game.wall_EA.bpp, game.wall_EA.size, game.wall_EA.endian);
 	init_minimap(game.minimap, true);
 	display_minimap(&game, game.minimap);
 	// mlx_put_image_to_window(game.mlx, game.win, game.minimap->map.img, 0, 0);

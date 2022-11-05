@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   container.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/10/24 13:30:53 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/05 14:44:06 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ typedef	struct s_int_pos		t_int_pos;
 typedef struct s_img			t_img;
 typedef struct s_color			t_color;
 typedef struct s_minimap		t_minimap;
+typedef struct s_texture		t_texture;
 
 struct s_color {
 	int	r;
@@ -35,6 +36,18 @@ struct s_img {
 	int		x;
 	int		y;
 	int		endian;
+};
+
+struct s_int_pos {
+	int	x;
+	int	y;
+};
+
+struct s_texture {
+	t_int_pos	tex_pos;
+	double		tex_start;
+	double		step;
+	t_img		img;
 };
 
 struct s_game {
@@ -57,10 +70,6 @@ struct s_elements {
 	int	had_EA;
 	int	had_F;
 	int	had_C;
-};
-struct s_int_pos {
-	int	x;
-	int	y;
 };
 /* For checking space surrounding */
 struct s_map_validation {
