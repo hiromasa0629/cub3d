@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:08:57 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 22:24:28 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@ typedef struct s_img			t_img;
 typedef struct s_color			t_color;
 typedef struct s_minimap		t_minimap;
 typedef struct s_texture		t_texture;
+typedef struct s_matrix			t_matrix;
+typedef struct s_player			t_player;
+typedef struct s_double_pos		t_double_pos;
 
 struct s_color {
 	int	r;
@@ -43,11 +46,46 @@ struct s_int_pos {
 	int	y;
 };
 
+struct s_double_pos
+{
+	double	x;
+	double	y;
+};
+
 struct s_texture {
 	t_int_pos	tex_pos;
 	double		tex_start;
 	double		step;
 	t_img		img;
+};
+
+struct s_matrix
+{
+	double x0;
+	double x1;
+	double y0;
+	double y1;
+};
+
+struct s_player
+{
+	t_matrix	pos;
+	double		angle;
+	char		c;
+};
+
+struct s_minimap
+{
+	t_matrix		player_pos; // player_pos to facing direction
+	double			player_angle; // in degree
+	t_int_pos		size;
+	t_int_pos		pxsize;
+	t_double_pos	start;
+	int line_len;
+	double player_delta_x;
+	double player_delta_y;
+	t_img img;
+	t_img map_3d;
 };
 
 struct s_game {
@@ -61,8 +99,8 @@ struct s_game {
 	t_img		wall_EA;
 	t_img		wall_WE;
 	t_int_pos	map_size;
-	t_minimap	*minimap;
-	t_int_pos	player_pos;
+	t_minimap	minimap;
+	t_player	player_pos;
 };
 
 /* For checking duplicated elements 

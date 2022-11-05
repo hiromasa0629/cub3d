@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:25 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:59:42 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 21:53:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,19 @@ int	is_valid_surrounding(char **lines, int y, int x, int l_no)
 		mv.topright && mv.bottomleft && mv.bottomright);
 }
 
+int	get_player_deg_n_dir(t_game *game)
+{
+	if (game->player_pos.c == 'E')
+		game->player_pos.angle = 0;
+	else if (game->player_pos.c == 'N')
+		game->player_pos.angle = 90;
+	else if (game->player_pos.c == 'W')
+		game->player_pos.angle = 180;
+	else if (game->player_pos.c == 'S')
+		game->player_pos.angle = 270;
+	set_player_direction(game);
+}
+
 int	is_valid_map_component(t_game *game, char **lines)
 {
 	t_int_pos	pos;
@@ -68,7 +81,9 @@ int	is_valid_map_component(t_game *game, char **lines)
 	}
 	if (player_pos.x == -1)
 		return (0);
-	game->player_pos = player_pos;
+	game->player_pos.pos.x0 = (double)player_pos.x;
+	game->player_pos.pos.y0 = (double)player_pos.y;
+	game->player_pos.c = (game->map)[player_pos.y][player_pos.x];
 	return (1);
 }
 
@@ -88,13 +103,11 @@ int	is_valid_map(t_game *game, char **lines)
 		pos.x = -1;
 		while (tmp[pos.y][++pos.x])
 		{
-			if (is_floor(tmp, pos))
+			if (is_floor(tmp, pos) && \
+				!is_valid_surrounding(tmp, pos.y, pos.x, l_no))
 			{
-				if (!is_valid_surrounding(tmp, pos.y, pos.x, l_no))
-				{
-					free_splits(tmp);
-					return (0);
-				}
+				free_splits(tmp);
+				return (0);
 			}
 		}
 	}

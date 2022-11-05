@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:31:16 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 22:21:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ int		is_fnc_element(char *s);
 int		is_str_digit(char *s);
 int		is_duplicated_element(char *s);
 int		get_file_line_no(char *map_path);
+/* render_utils.c */
+void	set_player_direction(t_game *game);
+void	get_start_pt(t_game *game);
+int		get_color(char **map, t_double_pos dpos);
 /* exit.c */
 void	exit_error(const char *s);
-
 #endif
