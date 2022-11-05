@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/11/05 20:09:53 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/05 20:56:39 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,13 @@ SRCS = ${wildcard $(SRCSDIR)/*.c} \
 		${wildcard $(SRCSDIR)/gnl/*.c} \
 		${wildcard $(SRCSDIR)/utils/*.c} \
 		${wildcard $(SRCSDIR)/parsing/*.c} \
-		${wildcard $(SRCSDIR)/minimap/*.c}
+		# ${wildcard $(SRCSDIR)/minimap/*.c}
 OBJSDIR = objs
 OBJS = $(SRCS:%.c=$(OBJSDIR)/%.o)
 CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBMLX = libmlx.dylib
-FSANITIZE = -fsanitize=address 
+FSANITIZE = -fsanitize=address -g
 NAME = cub3d
 RM = rm -f
 MINIMAP = srcs/minimap/minimaptmp.c ${wildcard $(SRCSDIR)/utils/*.c} ${wildcard $(SRCSDIR)/gnl/*.c}

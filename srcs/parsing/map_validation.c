@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:25 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:10:04 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 20:59:42 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,22 +76,28 @@ int	is_valid_map(t_game *game, char **lines)
 {
 	t_int_pos	pos;
 	int			l_no;
+	char		**tmp;
 
 	if (!is_valid_map_component(game, lines))
 		return (0);
-	pos.y = 1;
-	l_no = get_splits_no(lines);
-	while (lines[pos.y])
+	pos.y = -1;
+	tmp = remalloc_map(game, lines);
+	l_no = get_splits_no(tmp);
+	while (tmp[++pos.y])
 	{
-		pos.x = 1;
-		while (lines[pos.y][pos.x])
+		pos.x = -1;
+		while (tmp[pos.y][++pos.x])
 		{
-			if (is_floor(lines, pos))
-				if (!is_valid_surrounding(lines, pos.y, pos.x, l_no))
+			if (is_floor(tmp, pos))
+			{
+				if (!is_valid_surrounding(tmp, pos.y, pos.x, l_no))
+				{
+					free_splits(tmp);
 					return (0);
-			pos.x++;
+				}
+			}
 		}
-		pos.y++;
 	}
+	free_splits(tmp);
 	return (1);
 }

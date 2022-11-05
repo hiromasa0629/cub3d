@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:09:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 20:31:16 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ int		is_wall(char **lines, t_int_pos pos);
 int		is_player(char **lines, t_int_pos pos);
 int		is_floor(char **lines, t_int_pos pos);
 int		is_map_element(char **lines, t_int_pos pos);
+/* map_utils_2.c */
+char	**remalloc_map(t_game *game, char **lines);
 /* parsing_utils.c */
 int		is_wall_element(char *s);
 int		is_fnc_element(char *s);

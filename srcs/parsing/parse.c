@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:34:31 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:10:43 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 20:53:38 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,19 +38,27 @@ char	**store_tmp_file_content(char *map_path)
 	return (lines);
 }
 
-int	store_color_value(t_color *color, char *line)
+int	store_color_value(int *color, char *line)
 {
 	int		i;
 	char	**splits;
+	int		r;
+	int		g;
+	int		b;
+	int		res;
 	
 	i = 1;
 	while (line[i] == ' ')
 		i++;
 	splits = ft_split(&(line[i]), ',');
-	color->r = ft_atoi(splits[0]);
-	color->g = ft_atoi(splits[1]);
-	color->b = ft_atoi(splits[2]);
+	r = ft_atoi(splits[0]);
+	g = ft_atoi(splits[1]);
+	b = ft_atoi(splits[2]);
+	res = r;
+	res = (res << 8) + g;
+	res = (res << 8) + b;
 	free_splits(splits);
+	*color = res;
 	return (1);
 }
 
@@ -105,12 +113,15 @@ int	store_elements(t_game *game, char **lines)
 void	parse(t_game *game, char *map_path)
 {
 	(void)game;
-	char	**file_content;
+	char	**dptr;
 	
 	validate_extension(map_path);
-	file_content = store_tmp_file_content(map_path);
-	if (is_valid_file_content(game) && store_elements(game, file_content))
+	dptr = store_tmp_file_content(map_path);
+	if (is_valid_file_content(game, dptr) && store_elements(game, dptr))
+	{
+		free_splits(dptr);
 		return ;
-	free_splits(file_content);
+	}
+	free_splits(dptr);
 	exit_error("Invalid file content !\n");
 }
