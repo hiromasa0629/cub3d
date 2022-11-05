@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 16:31:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 20:06:41 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ int	key_hook(int keycode, t_game *game)
 void	init_game(t_game *game, char *map_path)
 {
 	parse(game, map_path);
-	
 }
 
 int	main(int ac, char **av)
