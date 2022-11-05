@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/05 16:31:13 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/05 20:09:39 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <math.h>
 #include <stdbool.h>
 #include "minimap.h"
+#include "main.h"
 
 #define PLAYER_STEP 0.25
 // Player step and player size are the same
@@ -307,7 +308,7 @@ void close_win(t_game *game)
 
 void player_movement(int key, t_game *game)
 {
-	t_minimap *minimap = game->minimap;
+	t_minimap *minimap = &(game->minimap);
 	printf("key: %d\n", key);
 	int angle;
 
@@ -317,7 +318,7 @@ void player_movement(int key, t_game *game)
 		if (minimap->player_angle > 360)
 			minimap->player_angle -= 360;
 	}
-	else if (key == 124)
+	else if (key == RIGHT_BTN)
 	{
 		minimap->player_angle -= 5;
 		if (minimap->player_angle < 0)
