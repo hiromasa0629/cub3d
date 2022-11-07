@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 12:50:30 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 18:42:05 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ typedef struct s_texture		t_texture;
 typedef struct s_matrix			t_matrix;
 typedef struct s_player			t_player;
 typedef struct s_double_pos		t_double_pos;
+typedef struct s_raycast		t_raycast;
 
 struct s_color {
 	int	r;
@@ -125,5 +126,20 @@ struct s_map_validation {
 	int	bottomleft;
 	int	bottomright;
 };
+/* For raycasting use */
+struct s_raycast {
+	t_matrix		draw_ray;
+	t_int_pos		map_pos;
+	t_int_pos		step;
+	t_int_pos		ray_deduct;
+	t_double_pos	rayDir;
+	t_double_pos	sideDist;
+	t_double_pos	deltaDist;
+	double			perpWallDist;
+	double			angle;
+	int				hit;
+	int				side;
+};
+
 
 #endif

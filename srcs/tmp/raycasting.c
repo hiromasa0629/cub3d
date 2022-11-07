@@ -6,44 +6,19 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/07 13:12:08 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 19:30:04 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdlib.h>
-#include <stdio.h>
-#include <math.h>
-#include <stdbool.h>
+
+#include "main.h"
 
 #define FOV 66.0
-#define STRIPE 1000.0
-#define h 1000
-#define MAP_WIDTH 15.0
-#define MAP_HEIGHT 15.0
+// #define STRIPE 1000.0
+// #define h 1000
+// #define MAP_WIDTH 15.0
+// #define MAP_HEIGHT 15.0
 #define TEXSIZE 64
-
-char *map_1[15] = {
-	"111111111111111", // 0
-	"100000000000001", // 1
-	"101000000000001", // 2
-	"101000000000001", // 3
-	"100000000011101", // 4
-	"101000000000010", // 5
-	"101000000000001", // 6
-	"100001000000001", // 7
-	"111111000W00001", // 8 (8,9)
-	"100100000001111", // 9
-	"100010000000001", // 10
-	"100100000000001", // 11
-	"100000000000001", // 12
-	"100000000000001", // 13
-	"111111111111111", // 14
-};
-
-void dda(t_matrix matrix, t_minimap *minimap, int color);
-double get_max(double x_step, double y_step);
-void my_mlx_pixel_put(t_img *data, int x, int y, int color);
 
 uint32_t	get_tex_color(t_img *data, int x, int y)
 {
@@ -64,6 +39,118 @@ void dda_ver(t_matrix matrix, t_minimap *minimap, t_texture texture)
 		color = get_tex_color(&(texture.img), texture.tex_pos.x, texture.tex_pos.y);
 		my_mlx_pixel_put(&minimap->map_3d, (int)matrix.x0, y, color);
 		y++;
+	}
+}
+
+void	init_raycast(t_game *game, t_raycast *rc, int x)
+{
+	rc->angle = (double)(game->player_pos.angle + (FOV / 2)) - \
+				((double)x * (FOV / WIN_WIDTH));
+	if (rc->angle < 0.0)
+		rc->angle += 360.0;
+	else if (rc->angle > 360.0)
+		rc->angle -= 360.0;
+	rc->rayDir.x = cos(deg_to_rad(rc->angle));
+	rc->rayDir.y = sin(deg_to_rad(rc->angle));
+	rc->map_pos.x = (int)game->player_pos.pos.x0;
+	rc->map_pos.y = (int)game->player_pos.pos.y0;
+	rc->deltaDist = get_delta_dist(rc);
+	rc->deltaDist.x = sqrt(1 + (rc->rayDir.y * rc->rayDir.y) / \
+		(rc->rayDir.x * rc->rayDir.x));
+	if (rc->rayDir.x == 0)
+		rc->deltaDist.x = 1e30;
+	rc->deltaDist.y = sqrt(1 + (rc->rayDir.x * rc->rayDir.x) / \
+		(rc->rayDir.y * rc->rayDir.y));
+	if (rc->rayDir.y == 0)
+		rc->deltaDist.y = 1e30;
+}
+
+void	set_side_dist_x(t_game *game, t_raycast *rc)
+{
+	if (rc->rayDir.x < 0)
+	{
+		rc->step.x = -1;
+		rc->sideDist.x = (game->player_pos.pos.x0 - rc->map_pos.x) * \
+			rc->deltaDist.x;
+		rc->ray_deduct.x = 1;
+	}
+	else
+	{
+		rc->step.x = 1;
+		rc->sideDist.x = (rc->map_pos.x + 1.0 - game->player_pos.pos.x0) * \
+			rc->deltaDist.x;
+	}
+}
+
+void	set_side_dist_y(t_game *game, t_raycast *rc)
+{
+	if (rc->rayDir.y < 0)
+	{
+		rc->step.y = 1;
+		rc->sideDist.y = (rc->map_pos.y + 1.0 - game->player_pos.pos.y0) * \
+			rc->deltaDist.y;
+	}
+	else
+	{
+		rc->step.y = -1;
+		rc->sideDist.y = (game->player_pos.pos.y0 - rc->map_pos.y) * \
+			rc->deltaDist.y;
+		rc->ray_deduct.y = 1;
+	}
+}
+
+void	determine_hit(t_game *game, t_raycast *rc)
+{
+	int	hit;
+	
+	hit = 0;
+	while (hit == 0)
+	{
+		if (rc->sideDist.x < rc->sideDist.y)
+		{
+			rc->sideDist.x += rc->deltaDist.x;
+			rc->map_pos.x += rc->step.x;
+			rc->side = 0;
+		}
+		else
+		{
+			rc->sideDist.y += rc->deltaDist.y;
+			rc->map_pos.y += rc->step.y;
+			rc->side = 1;
+		}
+		if ((game->map)[rc->map_pos.y][rc->map_pos.x] == '1')
+			hit = 1;
+	}
+}
+
+void	draw_rays(t_game *game, t_raycast *rc)
+{
+	rc->draw_ray.x0 = game->player_pos.pos.x0;
+	rc->draw_ray.y0 = game->player_pos.pos.y0;
+	if (rc->side == 0)
+	{
+		draw_ray.x1 = draw_ray.x0 + (rayDirX * fabs(mapX - draw_ray.x0 + ray_deduct_x) * deltaDistX);
+		draw_ray.y1 = draw_ray.y0 - (rayDirY * fabs(mapX - draw_ray.x0 + ray_deduct_x) * deltaDistX);
+	}
+	else
+	{
+		draw_ray.x1 = draw_ray.x0 + (rayDirX * fabs(mapY - draw_ray.y0 + ray_deduct_y) * deltaDistY);
+		draw_ray.y1 = draw_ray.y0 - (rayDirY * fabs(mapY - draw_ray.y0 + ray_deduct_y) * deltaDistY);
+	}
+	dda_line(draw_ray, game);
+}
+
+void	draw_3D(t_game *game)
+{
+	int			x;
+	t_raycast	rc;
+	
+	x = -1;
+	while (++x < WIN_WIDTH)
+	{
+		init_raycast(game, &rc, x);
+		set_side_dist_x(game, &rc);
+		set_side_dist_y(game, &rc);
 	}
 }
 
@@ -117,7 +204,7 @@ void draw_3D(t_game *game, t_minimap *minimap)
 			sideDistY = (minimap->player_pos.y0 - mapY) * deltaDistY;
 			ray_deduct_y = 1;
 		}
-		while (mapX >= 0 && mapX < MAP_WIDTH && mapY >= 0 && mapY <= MAP_HEIGHT && hit == 0)
+		while (hit == 0)
 		{
 			if (sideDistX < sideDistY)
 			{
@@ -131,26 +218,10 @@ void draw_3D(t_game *game, t_minimap *minimap)
 				mapY += stepY;
 				side = 1;
 			}
-			if (map_1[mapY][mapX] == '1')
-			{
+			if ((game->map)[mapY][mapX] == '1')
 				hit = 1;
-				double dist;
-			
-				draw_ray.x0 = minimap->player_pos.x0;
-				draw_ray.y0 = minimap->player_pos.y0;
-				if (side == 0)
-				{
-					draw_ray.x1 = draw_ray.x0 + (rayDirX * fabs(mapX - draw_ray.x0 + ray_deduct_x) * deltaDistX);
-					draw_ray.y1 = draw_ray.y0 - (rayDirY * fabs(mapX - draw_ray.x0 + ray_deduct_x) * deltaDistX);
-				}
-				else
-				{
-					draw_ray.x1 = draw_ray.x0 + (rayDirX * fabs(mapY - draw_ray.y0 + ray_deduct_y) * deltaDistY);
-					draw_ray.y1 = draw_ray.y0 - (rayDirY * fabs(mapY - draw_ray.y0 + ray_deduct_y) * deltaDistY);
-				}
-				dda(draw_ray, minimap, 0x00FF00);
-			}
 		}
+		
 		if (side == 0)
 			perpWallDist = (sideDistX - deltaDistX);
 		else

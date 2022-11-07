@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/07 14:12:25 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:50:08 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,14 +56,6 @@
 // 	"111111111111111", // 14
 // };
 
-void my_mlx_pixel_put(t_img *data, int x, int y, int color)
-{
-	char *dst;
-
-	dst = data->addr + (y * data->size + x * (data->bpp / 8));
-	*(unsigned int *)dst = color;
-}
-
 // void draw_minimap_block(t_minimap *minimap, int color, t_matrix *pixel)
 // {
 // 	t_int_pos count;
@@ -87,52 +79,6 @@ void my_mlx_pixel_put(t_img *data, int x, int y, int color)
 // 	if (i < 0)
 // 		return (-i);
 // 	return (i);
-// }
-
-// double get_max(double x_step, double y_step)
-// {
-// 	if (absolute(x_step) > absolute(y_step))
-// 		return (absolute(x_step));
-// 	else
-// 		return (absolute(y_step));
-// }
-
-// t_matrix scale(t_matrix matrix, t_minimap *minimap)
-// {
-// 	matrix.x0 = matrix.x0 * minimap->scale;
-// 	matrix.x1 = matrix.x1 * minimap->scale;
-// 	matrix.y0 = matrix.y0 * minimap->scale;
-// 	matrix.y1 = matrix.y1 * minimap->scale;
-// 	return (matrix);
-// }
-
-// t_matrix centralize(t_matrix matrix, t_minimap *minimap)
-// {
-// 	matrix.x0 -= minimap->start_x;
-// 	matrix.x1 -= minimap->start_x;
-// 	matrix.y0 -= minimap->start_y;
-// 	matrix.y1 -= minimap->start_y;
-// 	return (matrix);
-// }
-// void dda(t_matrix matrix, t_minimap *minimap, int color)
-// {
-// 	double x_step;
-// 	double y_step;
-// 	double max;
-
-// 	matrix = centralize(matrix, minimap);
-// 	matrix = scale(matrix, minimap);
-// 	x_step = matrix.x1 - matrix.x0;
-// 	y_step = matrix.y1 - matrix.y0;
-// 	max = get_max(x_step, y_step);
-// 	x_step /= max;
-// 	y_step /= max;
-// 	while (((int)(matrix.x0 - matrix.x1) || (int)(matrix.y0 - matrix.y1)) && matrix.x0 < MI_SCREEN_WIDTH && matrix.y0 < MI_SCREEN_HEIGHT && matrix.x0 > 0 && matrix.y0 > 0)
-// 	{
-// 		my_mlx_pixel_put(&minimap->map, matrix.x0, matrix.y0, color);
-// 		matrix.x0 += x_step;
-// 		matrix.y0 += y_step;
-// 	}
 // }
 
 void	draw_player(t_game *game)
@@ -166,7 +112,6 @@ void	draw_minimap(t_game *game)
 	y = 0;
 	while (y < game->minimap.pxsize.y)
 	{
-		printf("y: %d\n", y);
 		x = 0;
 		dpos.x = game->minimap.start.x;
 		while (x < game->minimap.pxsize.x)
@@ -179,9 +124,6 @@ void	draw_minimap(t_game *game)
 		dpos.y +=  1.0 / SCALE;
 		y++;
 	}
-	printf("player.x: %f, player.y: %f\n", game->player_pos.pos.x0, game->player_pos.pos.y0);
-	printf("startpx.x: %f, startpx.y: %f\n", game->minimap.start.x, game->minimap.start.y);
-	printf("dpos.x: %f, dpos.y: %f\n", dpos.x, dpos.y);
 	draw_player(game);
 }
 
@@ -309,14 +251,12 @@ void	draw_minimap(t_game *game)
 
 void init_minimap(t_game *game)
 {
+	game->minimap.size.x = MI_WIDTH;
 	if (game->map_size.x < MI_WIDTH)
 		game->minimap.size.x = game->map_size.x;
-	else
-		game->minimap.size.x = MI_WIDTH;
+	game->minimap.size.y = MI_HEIGHT;
 	if (game->map_size.y < MI_HEIGHT)
 		game->minimap.size.y = game->map_size.y;
-	else
-		game->minimap.size.y = MI_HEIGHT;
 	game->minimap.pxsize.x = game->minimap.size.x * SCALE;
 	game->minimap.pxsize.y = game->minimap.size.y * SCALE;
 	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 14:16:00 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:31:56 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,8 +51,6 @@ int	get_color(char **map, t_double_pos dpos)
 	pos.y = dpos.y;
 	if (is_wall(map, pos))
 		return (GREEN);
-	// if (is_floor(map, pos))
-	// return (0);
 	return (WHITE);
 }
 

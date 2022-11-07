@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 13:10:32 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:50:32 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@ void	get_start_pt(t_game *game);
 int		get_color(char **map, t_double_pos dpos);
 void	save_img_addr(t_img *img);
 double	deg_to_rad(double degree);
+/* render_utils_2.c */
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 /* exit.c */
 void	exit_error(const char *s);
 #endif
