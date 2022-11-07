@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/07 14:50:08 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 21:46:50 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -249,23 +249,7 @@ void	draw_minimap(t_game *game)
 // 	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
 // }
 
-void init_minimap(t_game *game)
-{
-	game->minimap.size.x = MI_WIDTH;
-	if (game->map_size.x < MI_WIDTH)
-		game->minimap.size.x = game->map_size.x;
-	game->minimap.size.y = MI_HEIGHT;
-	if (game->map_size.y < MI_HEIGHT)
-		game->minimap.size.y = game->map_size.y;
-	game->minimap.pxsize.x = game->minimap.size.x * SCALE;
-	game->minimap.pxsize.y = game->minimap.size.y * SCALE;
-	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \
-											game->minimap.pxsize.y);
-	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, game->minimap.pxsize.y);
-	save_img_addr(&(game->minimap.img));
-	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
-}
+
 
 // int main(void)
 // {

@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/11/07 13:17:59 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/07 21:56:56 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -34,7 +34,7 @@ $(OBJSDIR)/%.o: %.c
 	$(CC) $(CFLAGS) -I includes -c $< -o $@
 
 ${NAME}: $(OBJS)
-	${CC} ${LIBMLX} $(OBJS) -o ${NAME}
+	${CC} ${FSANITIZE} ${LIBMLX} $(OBJS) -o ${NAME}
 	
 minimap:
 	$(CC) $(CFLAGS) -I includes $(LIBMLX) $(MINIMAP) -o minimap

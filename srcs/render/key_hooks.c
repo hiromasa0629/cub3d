@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 14:31:50 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 22:04:33 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,23 +49,11 @@ void	handle_angle(int key, t_game *game)
 	}
 }
 
-void	recreate_img(t_game *game)
-{
-	mlx_destroy_image(game->mlx, game->minimap.img.img);
-	// mlx_destroy_image(game->mlx, game->img_3d.img);
-	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, game->minimap.pxsize.y);
-	save_img_addr(&(game->minimap.img));
-	// game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	// save_img_addr(&(game->img_3d));
-}
-
 int	handle_keypress(int key, t_game *game)
 {
-	handle_movements(key, game);
+	if (key == W_BTN || key == S_BTN || key == A_BTN || key == D_BTN)
+		handle_movements(key, game);
 	handle_angle(key, game);
 	set_player_direction(game);
-	recreate_img(game);
-	draw_minimap(game);
-	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:48 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 19:18:31 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 21:52:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 double get_max(double x_step, double y_step)
 {
-	if (absolute(x_step) > absolute(y_step))
-		return (absolute(x_step));
+	if (fabs(x_step) > fabs(y_step))
+		return (fabs(x_step));
 	else
-		return (absolute(y_step));
+		return (fabs(y_step));
 }
 
 t_matrix scale(t_matrix matrix)

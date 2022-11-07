@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 14:17:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 22:05:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,41 @@ int	key_hook(int keycode, t_game *game)
 	return (0);
 }
 
+void init_minimap(t_game *game)
+{
+	game->minimap.size.x = MI_WIDTH;
+	if (game->map_size.x < MI_WIDTH)
+		game->minimap.size.x = game->map_size.x;
+	game->minimap.size.y = MI_HEIGHT;
+	if (game->map_size.y < MI_HEIGHT)
+		game->minimap.size.y = game->map_size.y;
+	game->minimap.pxsize.x = game->minimap.size.x * SCALE;
+	game->minimap.pxsize.y = game->minimap.size.y * SCALE;
+	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \
+											game->minimap.pxsize.y);
+	save_img_addr(&(game->minimap.img));
+}
+
+void	recreate_img(t_game *game)
+{
+	mlx_destroy_image(game->mlx, game->minimap.img.img);
+	mlx_destroy_image(game->mlx, game->img_3d.img);
+	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, game->minimap.pxsize.y);
+	save_img_addr(&(game->minimap.img));
+	game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	save_img_addr(&(game->img_3d));
+}
+
+int	render_frame(t_game *game)
+{
+	recreate_img(game);
+	draw_minimap(game);
+	draw_3D(game);
+	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
+	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
+	return (0);
+}
+
 void	init_game(t_game *game, char *map_path)
 {
 	game->mlx = mlx_init();
@@ -27,7 +62,10 @@ void	init_game(t_game *game, char *map_path)
 	for (int i = 0; (game->map)[i]; i++)
 		printf("%s\n", (game->map)[i]);
 	init_minimap(game);
+	game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	save_img_addr(&(game->img_3d));
 	mlx_hook(game->win, 2, 1L << 0, handle_keypress, game);
+	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
 }
 

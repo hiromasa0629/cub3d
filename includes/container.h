@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 18:42:05 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 21:33:57 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,13 @@ struct s_raycast {
 	t_double_pos	rayDir;
 	t_double_pos	sideDist;
 	t_double_pos	deltaDist;
+	t_double_pos	wall;
+	t_texture		texture;
 	double			perpWallDist;
 	double			angle;
+	int				line_height;
+	int				draw_start;
+	int				draw_end;
 	int				hit;
 	int				side;
 };
