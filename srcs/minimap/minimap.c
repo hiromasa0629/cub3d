@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/05 22:25:17 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 12:54:20 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,18 +159,18 @@ void	draw_minimap(t_game *game)
 	get_start_pt(game);
 	dpos.y = game->minimap.start.y;
 	y = 0;
-	while (y < game->minimap.screen_height)
+	while (y < game->minimap.pxsize.y)
 	{
 		x = 0;
 		dpos.x = game->minimap.start.x;
-		while (x < game->minimap.screen_width)
+		while (x < game->minimap.pxsize.x)
 		{
 			color = get_color(game->map, dpos);
 			my_mlx_pixel_put(&(game->minimap.img), x, y, color);
-			dpos.x += 1.0 / TILE_SIZE;
+			dpos.x += 1.0 / SCALE;
 			x++;
 		}
-		dpos.y +=  1.0 / TILE_SIZE;
+		dpos.y +=  1.0 / SCALE;
 		y++;
 	}
 	draw_player(game);
@@ -252,55 +252,55 @@ void close_win(t_game *game)
 	exit(0);
 }
 
-void player_movement(int key, t_game *game)
-{
-	t_minimap *minimap = &(game->minimap);
-	int angle;
-
-	if (key == 123)
-	{
-		minimap->player_angle += 5;
-		if (minimap->player_angle > 360)
-			minimap->player_angle -= 360;
-	}
-	else if (key == RIGHT_BTN)
-	{
-		minimap->player_angle -= 5;
-		if (minimap->player_angle < 0)
-			minimap->player_angle += 360;
-	}
-	else if (key == 13) // up
-	{
-		minimap->player_pos.x0 += cos(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
-		minimap->player_pos.y0 -= sin(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
-	}
-	else if (key == 1) // down
-	{
-		minimap->player_pos.x0 -= cos(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
-		minimap->player_pos.y0 += sin(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
-	}
-	else if (key == 0 || key == 2) // 0 = left, 2 == right
-	{
-		if (key == 0)
-			angle = (int)(minimap->player_angle + 90) % 360;
-		else
-			angle = (int)(minimap->player_angle - 90) % 360;
-		minimap->player_pos.x0 += cos(deg_to_rad(angle)) * PLAYER_STEP;
-		minimap->player_pos.y0 -= sin(deg_to_rad(angle)) * PLAYER_STEP;
-	}
-	set_player_direction(minimap);
-	mlx_clear_window(game->mlx, game->win);
-	minimap->map.img = mlx_new_image(game->mlx, 200, 200);
-	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
-										  &minimap->map.endian);
-	minimap->map_3d.img = mlx_new_image(game->mlx, 1000, 1000);
-	minimap->map_3d.addr = mlx_get_data_addr(minimap->map_3d.img, &minimap->map_3d.bpp, &minimap->map_3d.size,
-											 &minimap->map_3d.endian);
-	init_minimap(minimap, false);
-	draw_minimap(minimap);
-	draw_3D(game, minimap);
-	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
-}
+// void player_movement(int key, t_game *game)
+// {
+// 	t_minimap *minimap = &(game->minimap);
+// 	int angle;
+//
+// 	if (key == 123)
+// 	{
+// 		minimap->player_angle += 5;
+// 		if (minimap->player_angle > 360)
+// 			minimap->player_angle -= 360;
+// 	}
+// 	else if (key == RIGHT_BTN)
+// 	{
+// 		minimap->player_angle -= 5;
+// 		if (minimap->player_angle < 0)
+// 			minimap->player_angle += 360;
+// 	}
+// 	else if (key == 13) // up
+// 	{
+// 		minimap->player_pos.x0 += cos(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
+// 		minimap->player_pos.y0 -= sin(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
+// 	}
+// 	else if (key == 1) // down
+// 	{
+// 		minimap->player_pos.x0 -= cos(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
+// 		minimap->player_pos.y0 += sin(deg_to_rad(minimap->player_angle)) * PLAYER_STEP;
+// 	}
+// 	else if (key == 0 || key == 2) // 0 = left, 2 == right
+// 	{
+// 		if (key == 0)
+// 			angle = (int)(minimap->player_angle + 90) % 360;
+// 		else
+// 			angle = (int)(minimap->player_angle - 90) % 360;
+// 		minimap->player_pos.x0 += cos(deg_to_rad(angle)) * PLAYER_STEP;
+// 		minimap->player_pos.y0 -= sin(deg_to_rad(angle)) * PLAYER_STEP;
+// 	}
+// 	set_player_direction(minimap);
+// 	mlx_clear_window(game->mlx, game->win);
+// 	minimap->map.img = mlx_new_image(game->mlx, 200, 200);
+// 	minimap->map.addr = mlx_get_data_addr(minimap->map.img, &minimap->map.bpp, &minimap->map.size,
+// 										  &minimap->map.endian);
+// 	minimap->map_3d.img = mlx_new_image(game->mlx, 1000, 1000);
+// 	minimap->map_3d.addr = mlx_get_data_addr(minimap->map_3d.img, &minimap->map_3d.bpp, &minimap->map_3d.size,
+// 											 &minimap->map_3d.endian);
+// 	init_minimap(minimap, false);
+// 	draw_minimap(minimap);
+// 	draw_3D(game, minimap);
+// 	mlx_put_image_to_window(game->mlx, game->win, minimap->map.img, 0, 0);
+// }
 
 int deal_key(int key, t_game *game)
 {
@@ -313,10 +313,6 @@ int deal_key(int key, t_game *game)
 
 void init_minimap(t_game *game)
 {
-	// minimap->width = 10.0;
-	// minimap->height = 10.0;
-	// minimap->screen_width = 200;
-	// minimap->screen_height = 200;
 	if (game->map_size.x < MI_WIDTH)
 		game->minimap.size.x = game->map_size.x;
 	else
@@ -330,6 +326,7 @@ void init_minimap(t_game *game)
 	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \
 											game->minimap.pxsize.y);
 	get_start_pt(game);
+	
 }
 
 int main(void)

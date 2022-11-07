@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 22:19:48 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 12:49:26 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ void get_start_pt(t_game *game)
 	t_double_pos	dist;
 	t_double_pos	player_pos;
 	
-	dist.x = (game->minimap.width - PLAYER_STEP) / 2;
-	dist.y = (game->minimap.height - PLAYER_STEP) / 2;
+	dist.x = (game->minimap.size.x - PLAYER_STEP) / 2;
+	dist.y = (game->minimap.size.y - PLAYER_STEP) / 2;
 	player_pos.x = game->player_pos.pos.x0;
 	player_pos.y = game->player_pos.pos.y0;
 	if (player_pos.x - dist.x < 0.0)
 		game->minimap.start.x = 0.0;
 	else if (player_pos.x + dist.x + PLAYER_STEP > game->map_size.x)
-		game->minimap.start.x = game->map_size.x - game->minimap.width;
+		game->minimap.start.x = game->map_size.x - game->minimap.size.x;
 	else
 		game->minimap.start.x = player_pos.x - dist.x;
 	if (player_pos.y - dist.y < 0.0)
 		game->minimap.start.y = 0.0;
 	else if (player_pos.y + dist.y + PLAYER_STEP > game->map_size.y)
-		game->minimap.start.y = game->map_size.y - game->minimap.height;
+		game->minimap.start.y = game->map_size.y - game->minimap.size.x;
 	else
 		game->minimap.start.y = player_pos.x - dist.y;
 }
@@ -54,4 +54,9 @@ int	get_color(char **map, t_double_pos dpos)
 	if (is_floor(map, pos))
 		return (WHITE);
 	return (0);
+}
+
+void	save_img_addr(t_img *img)
+{
+	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size), &(img->endian));
 }

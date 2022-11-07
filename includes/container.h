@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 22:24:28 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 12:50:30 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ struct s_player
 
 struct s_minimap
 {
+	t_img img;
 	t_matrix		player_pos; // player_pos to facing direction
 	double			player_angle; // in degree
 	t_int_pos		size;
@@ -84,8 +85,6 @@ struct s_minimap
 	int line_len;
 	double player_delta_x;
 	double player_delta_y;
-	t_img img;
-	t_img map_3d;
 };
 
 struct s_game {
@@ -101,6 +100,7 @@ struct s_game {
 	t_int_pos	map_size;
 	t_minimap	minimap;
 	t_player	player_pos;
+	t_img		img_3d;
 };
 
 /* For checking duplicated elements 

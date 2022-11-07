@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 22:21:59 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 12:49:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,7 @@ int		get_file_line_no(char *map_path);
 void	set_player_direction(t_game *game);
 void	get_start_pt(t_game *game);
 int		get_color(char **map, t_double_pos dpos);
+void	save_img_addr(t_img *img);
 /* exit.c */
 void	exit_error(const char *s);
 #endif
