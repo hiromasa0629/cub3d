@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 12:49:26 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 13:10:09 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ int	get_color(char **map, t_double_pos dpos)
 void	save_img_addr(t_img *img)
 {
 	img->addr = mlx_get_data_addr(img->img, &(img->bpp), &(img->size), &(img->endian));
+}
+
+double	deg_to_rad(double degree)
+{
+	return (degree * (M_PI / 180.0));
 }

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/05 16:09:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 13:12:08 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 #include <stdio.h>
 #include <math.h>
 #include <stdbool.h>
-#include "minimap.h"
 
 #define FOV 66.0
 #define STRIPE 1000.0

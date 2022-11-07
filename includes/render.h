@@ -1,20 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   render.h                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/26 15:18:53 by yang              #+#    #+#             */
-/*   Updated: 2022/10/26 15:24:17 by yang             ###   ########.fr       */
+/*   Created: 2022/11/07 13:07:10 by hyap              #+#    #+#             */
+/*   Updated: 2022/11/07 13:16:07 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minimap.h"
+#ifndef RENDER_H
+# define RENDER_H
+# include "container.h"
 
-// #define PI 3.14159265
+/* key_hooks.c */
+void	handle_keypress(int key, t_game *game);
+/* minimap.c */
+void	init_minimap(t_game *game);
 
-double deg_to_rad(double degree)
-{
-	return (degree * (PI / 180.0));
-}
+#endif

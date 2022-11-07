@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 12:51:11 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 13:18:32 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ void	recreate_img(t_game *game)
 	game->minimap.img.img = mlx_new_image(game->mlx, MI_PX_WIDTH, MI_PX_HEIGHT);
 	save_img_addr(&(game->minimap.img));
 	game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
-	save_img_addr(&(game->img_3d.img));
+	save_img_addr(&(game->img_3d));
 }
 
 void	handle_keypress(int key, t_game *game)

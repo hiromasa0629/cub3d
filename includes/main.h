@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 12:43:57 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 13:14:27 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 # include "container.h"
 # include "utils.h"
 # include "parsing.h"
-# include "minimap.h"
+# include "render.h"
 /* Keycodes */
 # define ESC_BTN 53
 # define RIGHT_BTN 124
