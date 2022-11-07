@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 13:28:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:17:28 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,10 @@ void	init_game(t_game *game, char *map_path)
 	game->mlx = mlx_init();
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
 	parse(game, map_path);
-	printf("game->player.x: %f, game->player.y: %f\n", game->player_pos.pos.x0, game->player_pos.pos.y0);
+	for (int i = 0; (game->map)[i]; i++)
+		printf("%s\n", (game->map)[i]);
 	init_minimap(game);
+	mlx_hook(game->win, 2, 1L << 0, handle_keypress, game);
 	mlx_loop(game->mlx);
 }
 

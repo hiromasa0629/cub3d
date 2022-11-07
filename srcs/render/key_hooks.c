@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 13:18:32 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:18:16 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,16 +50,16 @@ void	recreate_img(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->minimap.img.img);
 	mlx_destroy_image(game->mlx, game->img_3d.img);
-	game->minimap.img.img = mlx_new_image(game->mlx, MI_PX_WIDTH, MI_PX_HEIGHT);
+	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, game->minimap.pxsize.y);
 	save_img_addr(&(game->minimap.img));
 	game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	save_img_addr(&(game->img_3d));
 }
 
-void	handle_keypress(int key, t_game *game)
+int	handle_keypress(int key, t_game *game)
 {
 	handle_movements(key, game);
 	handle_angle(key, game);
 	set_player_direction(game);
-	get_start_pt(game);
+	return (0);
 }

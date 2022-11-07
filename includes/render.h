@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:07:10 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 13:16:07 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:19:10 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 # include "container.h"
 
 /* key_hooks.c */
-void	handle_keypress(int key, t_game *game);
+int		handle_keypress(int key, t_game *game);
 /* minimap.c */
 void	init_minimap(t_game *game);
 

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:45:09 by yang              #+#    #+#             */
-/*   Updated: 2022/11/07 13:26:26 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:12:25 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -143,8 +143,7 @@ void	draw_player(t_game *game)
 	
 	startpx.x = (game->player_pos.pos.x0 - game->minimap.start.x) * SCALE - 2;
 	startpx.y = (game->player_pos.pos.y0 - game->minimap.start.y) * SCALE - 2;
-	printf("player.x: %f, player.y: %f\n", game->player_pos.pos.x0, game->player_pos.pos.y0);
-	printf("startpx.x: %d, startpx.y: %d\n", startpx.x, startpx.y);
+
 	y = -1;
 	while (++y < 5)
 	{
@@ -167,6 +166,7 @@ void	draw_minimap(t_game *game)
 	y = 0;
 	while (y < game->minimap.pxsize.y)
 	{
+		printf("y: %d\n", y);
 		x = 0;
 		dpos.x = game->minimap.start.x;
 		while (x < game->minimap.pxsize.x)
@@ -179,6 +179,9 @@ void	draw_minimap(t_game *game)
 		dpos.y +=  1.0 / SCALE;
 		y++;
 	}
+	printf("player.x: %f, player.y: %f\n", game->player_pos.pos.x0, game->player_pos.pos.y0);
+	printf("startpx.x: %f, startpx.y: %f\n", game->minimap.start.x, game->minimap.start.y);
+	printf("dpos.x: %f, dpos.y: %f\n", dpos.x, dpos.y);
 	draw_player(game);
 }
 
@@ -318,7 +321,7 @@ void init_minimap(t_game *game)
 	game->minimap.pxsize.y = game->minimap.size.y * SCALE;
 	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \
 											game->minimap.pxsize.y);
-	game->minimap.img.img = mlx_new_image(game->mlx, MI_PX_WIDTH, MI_PX_HEIGHT);
+	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, game->minimap.pxsize.y);
 	save_img_addr(&(game->minimap.img));
 	draw_minimap(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);

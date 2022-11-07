@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:25 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 13:31:07 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/07 14:00:31 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,7 @@ int	is_valid_surrounding(char **lines, int y, int x, int l_no)
 
 void	get_player_deg_n_dir(t_game *game)
 {
-	printf("here\n");
+	
 	if (game->player_pos.c == 'E')
 		game->player_pos.angle = 0;
 	else if (game->player_pos.c == 'N')
@@ -55,7 +55,6 @@ void	get_player_deg_n_dir(t_game *game)
 		game->player_pos.angle = 180;
 	else if (game->player_pos.c == 'S')
 		game->player_pos.angle = 270;
-	printf("here2\n");
 	set_player_direction(game);
 }
 
@@ -85,7 +84,7 @@ int	is_valid_map_component(t_game *game, char **lines)
 		return (0);
 	game->player_pos.pos.x0 = (double)player_pos.x;
 	game->player_pos.pos.y0 = (double)player_pos.y;
-	game->player_pos.c = (game->map)[player_pos.y][player_pos.x];
+	game->player_pos.c = lines[player_pos.y][player_pos.x];
 	get_player_deg_n_dir(game);
 	return (1);
 }
@@ -98,7 +97,6 @@ int	is_valid_map(t_game *game, char **lines)
 
 	if (!is_valid_map_component(game, lines))
 		return (0);
-	printf("valid.player.x: %f, valid.player.y: %f\n", game->player_pos.pos.x0, game->player_pos.pos.y0);
 	pos.y = -1;
 	tmp = remalloc_map(game, lines);
 	l_no = get_splits_no(tmp);
