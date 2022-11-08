@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 22:04:33 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 14:40:36 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,8 @@
 
 void	handle_movements(int key, t_game *game)
 {
-	double	angle;
+	double		angle;
+	t_int_pos	tmp;
 
 	angle = game->player_pos.angle;
 	if (key == A_BTN)
@@ -23,10 +24,18 @@ void	handle_movements(int key, t_game *game)
 		angle = (int)(game->player_pos.angle - 90) % 360;
 	if (key != S_BTN)
 	{
-		game->player_pos.pos.x0 += cos(deg_to_rad(angle)) * PLAYER_STEP;
-		game->player_pos.pos.y0 -= sin(deg_to_rad(angle)) * PLAYER_STEP;
+		tmp.x = game->player_pos.pos.x0 + cos(deg_to_rad(angle)) * PLAYER_STEP;
+		tmp.y =	game->player_pos.pos.y0 - sin(deg_to_rad(angle)) * PLAYER_STEP;
+		if (!is_wall(game->map, tmp))
+		{
+			game->player_pos.pos.x0 += cos(deg_to_rad(angle)) * PLAYER_STEP;
+			game->player_pos.pos.y0 -= sin(deg_to_rad(angle)) * PLAYER_STEP;
+		}
+		return ;
 	}
-	else
+	tmp.x = game->player_pos.pos.x0 - cos(deg_to_rad(angle)) * PLAYER_STEP;
+	tmp.y =	game->player_pos.pos.y0 + sin(deg_to_rad(angle)) * PLAYER_STEP;
+	if (!is_wall(game->map, tmp))
 	{
 		game->player_pos.pos.x0 -= cos(deg_to_rad(angle)) * PLAYER_STEP;
 		game->player_pos.pos.y0 += sin(deg_to_rad(angle)) * PLAYER_STEP;
