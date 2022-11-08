@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:48 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 21:52:44 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 11:55:04 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,8 @@ void dda_line(t_matrix matrix, t_game *game)
 	double		y_step;
 	double		max;
 
-	matrix = centralize(game->player_pos.pos, game);
-	matrix = scale(game->player_pos.pos);
+	matrix = centralize(matrix, game);
+	matrix = scale(matrix);
 	x_step = matrix.x1 - matrix.x0;
 	y_step = matrix.y1 - matrix.y0;
 	max = get_max(x_step, y_step);

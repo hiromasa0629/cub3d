@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 11:22:46 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 11:48:02 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ void get_start_pt(t_game *game)
 	t_double_pos	dist;
 	t_double_pos	player_pos;
 	
-	dist.x = game->minimap.size.x / 2;
-	dist.y = game->minimap.size.y / 2;
+	dist.x = (double)game->minimap.size.x / 2;
+	dist.y = (double)game->minimap.size.y / 2;
 	player_pos.x = game->player_pos.pos.x0;
 	player_pos.y = game->player_pos.pos.y0;
 	if (player_pos.x - dist.x < 0.0)
@@ -38,10 +38,11 @@ void get_start_pt(t_game *game)
 	if (player_pos.y - dist.y < 0.0)
 		game->minimap.start.y = 0.0;
 	else if (player_pos.y + dist.y > game->map_size.y)
-		game->minimap.start.y = game->map_size.y - game->minimap.size.x;
+		game->minimap.start.y = game->map_size.y - game->minimap.size.y;
 	else
-		game->minimap.start.y = player_pos.x - dist.y;
+		game->minimap.start.y = player_pos.y - dist.y;
 	printf("start.x: %f, start.y: %f\n", game->minimap.start.x, game->minimap.start.y);
+	printf("mi.x: %d, mi.y: %d\n", game->minimap.size.x, game->minimap.size.y);
 }
 
 int	get_color(char **map, t_double_pos dpos)
