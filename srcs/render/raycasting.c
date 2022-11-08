@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/08 12:02:01 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 12:50:47 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,13 +46,18 @@ void	init_raycast(t_game *game, t_raycast *rc, int x)
 	rc->rayDir.y = sin(deg_to_rad(rc->angle));
 	rc->map_pos.x = (int)game->player_pos.pos.x0;
 	rc->map_pos.y = (int)game->player_pos.pos.y0;
+	rc->ray_deduct.x = 0;
+	rc->ray_deduct.y = 0;
 	rc->deltaDist.x = sqrt(1 + (rc->rayDir.y * rc->rayDir.y) / \
 		(rc->rayDir.x * rc->rayDir.x));
-	if (rc->rayDir.x == 0)
+	if (rc->rayDir.x <= 0.00000001)
+	{
+		printf("here\n");
 		rc->deltaDist.x = 1e30;
+	}
 	rc->deltaDist.y = sqrt(1 + (rc->rayDir.x * rc->rayDir.x) / \
 		(rc->rayDir.y * rc->rayDir.y));
-	if (rc->rayDir.y == 0)
+	if (rc->rayDir.y <= 0.000000001)
 		rc->deltaDist.y = 1e30;
 }
 
@@ -182,7 +187,7 @@ void	draw_texture(t_game *game, t_raycast *rc, int x)
 	pre_draw_texture(game, rc);
 	rc->texture.step = 1.0 * TEXSIZE / rc->line_height;
 	rc->wall.x = game->player_pos.pos.x0 + rc->perpWallDist * rc->rayDir.x;
-	if (rc->side == 0) 
+	if (rc->side == 0)
 		rc->wall.x = game->player_pos.pos.y0 + rc->perpWallDist * rc->rayDir.y;
 	rc->wall.x -= (int)rc->wall.x;
 	rc->texture.tex_pos.x = (int)(rc->wall.x * (double)TEXSIZE);

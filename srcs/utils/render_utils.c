@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 11:48:02 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 12:34:29 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,6 @@ void get_start_pt(t_game *game)
 		game->minimap.start.y = game->map_size.y - game->minimap.size.y;
 	else
 		game->minimap.start.y = player_pos.y - dist.y;
-	printf("start.x: %f, start.y: %f\n", game->minimap.start.x, game->minimap.start.y);
-	printf("mi.x: %d, mi.y: %d\n", game->minimap.size.x, game->minimap.size.y);
 }
 
 int	get_color(char **map, t_double_pos dpos)
