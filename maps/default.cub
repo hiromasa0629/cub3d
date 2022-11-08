@@ -1,7 +1,7 @@
-NO ./assets/Wall.xpm
-SO ./assets/Wall.xpm
-WE ./assets/Wall.xpm
-EA ./assets/Wall.xpm
+NO ./assets/wall.xpm
+SO ./assets/bookshelf.xpm
+WE ./assets/diamond.xpm
+EA ./assets/rickroll.xpm
 
 F 255,100,0
 C 225,30,0

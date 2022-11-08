@@ -6,13 +6,13 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 14:34:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 21:08:24 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void init_minimap(t_game *game)
+void	init_minimap(t_game *game)
 {
 	game->minimap.size.x = MI_WIDTH;
 	if (game->map_size.x < MI_WIDTH)
@@ -32,7 +32,7 @@ void init_minimap(t_game *game)
 							WIN_HEIGHT / 2, WIN_HEIGHT);
 }
 
-void	recreate_img(t_game *game)
+int	render_frame(t_game *game)
 {
 	mlx_destroy_image(game->mlx, game->minimap.img.img);
 	mlx_destroy_image(game->mlx, game->img_3d.img);
@@ -44,11 +44,6 @@ void	recreate_img(t_game *game)
 	draw_floor_n_ceiling(&(game->img_3d), game->c_color, 0, WIN_HEIGHT / 2);
 	draw_floor_n_ceiling(&(game->img_3d), game->f_color, \
 							WIN_HEIGHT / 2, WIN_HEIGHT);
-}
-
-int	render_frame(t_game *game)
-{
-	recreate_img(game);
 	draw_minimap(game);
 	draw_3D(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
@@ -66,6 +61,7 @@ void	init_game(t_game *game, char *map_path)
 	printf("\n");
 	printf("color_c: %d, color_f: %d\n", game->c_color, game->f_color);
 	init_minimap(game);
+	init_weapon(game, &(game->weapons));
 	mlx_hook(game->win, 2, 1L << 0, handle_keypress, game);
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);

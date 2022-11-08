@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 18:44:18 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 20:58:15 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,5 +59,14 @@
 # define _FLOOR_IMG 2
 # define _CEILING_IMG 3
 # define _3D_IMG 4 
+/* Weapon animation paths */
+# define WEAPON0 "./assets/weapon0.xpm"
+# define WEAPON1 "./assets/weapon1.xpm"
+# define WEAPON2 "./assets/weapon2.xpm"
+# define WEAPON3 "./assets/weapon3.xpm"
+# define WEAPON4 "./assets/weapon4.xpm"
+/* Weapon Status */
+# define CLOSED 0
+# define OPENED 1
 
 #endif

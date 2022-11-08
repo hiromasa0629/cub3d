@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 14:35:57 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 21:04:59 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ typedef struct s_matrix			t_matrix;
 typedef struct s_player			t_player;
 typedef struct s_double_pos		t_double_pos;
 typedef struct s_raycast		t_raycast;
+typedef struct s_weapons		t_weapons;
 
 struct s_color {
 	int	r;
@@ -88,6 +89,14 @@ struct s_minimap
 	double player_delta_y;
 };
 
+struct s_weapons {
+	int			x;
+	int			y;
+	int			status;
+	t_int_pos	start_pos;
+	t_img		*images;
+};
+
 struct s_game {
 	void		*mlx;
 	void		*win;
@@ -102,6 +111,7 @@ struct s_game {
 	t_minimap	minimap;
 	t_player	player_pos;
 	t_img		img_3d;
+	t_weapons	weapons;
 };
 
 /* For checking duplicated elements 

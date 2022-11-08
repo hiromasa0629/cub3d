@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:55:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 13:55:32 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/08 19:06:15 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,20 @@ void	pre_draw_texture(t_game *game, t_raycast *rc)
 		rc->draw_end = WIN_HEIGHT - 1;
 }
 
+t_img	get_texture_img(t_game *game, t_raycast *rc)
+{
+	if (rc->side == 0 && rc->rayDir.x < 0)
+		return (game->wall_EA); // diamond
+	if (rc->side == 0)
+		return (game->wall_WE); // rickroll
+	if (rc->side == 1 && rc->rayDir.y < 0)
+		return (game->wall_NO); // wall
+	if (rc->side == 1)
+		return (game->wall_SO); // bookshelf
+	return (game->wall_WE);
+}
 
-void dda_3D(t_game *game, t_raycast *rc, int x)
+void	dda_3D(t_game *game, t_raycast *rc, int x)
 {
 	uint32_t	color;
 	int y;
@@ -51,13 +63,11 @@ void dda_3D(t_game *game, t_raycast *rc, int x)
 void	draw_texture(t_game *game, t_raycast *rc, int x)
 {
 	pre_draw_texture(game, rc);
+	rc->texture.img = get_texture_img(game, rc);
 	rc->texture.step = 1.0 * TEXSIZE / rc->line_height;
 	rc->wall.x = game->player_pos.pos.x0 + (rc->perpWallDist * rc->rayDir.x);
 	if (rc->side == 0)
-	{
-		// printf("side: %d\n", rc->side);
 		rc->wall.x = game->player_pos.pos.y0 + (rc->perpWallDist * rc->rayDir.y);
-	}
 	rc->wall.x -= (int)rc->wall.x;
 	rc->texture.tex_pos.x = (int)(rc->wall.x * (double)TEXSIZE);
 	if (rc->side == 0 && rc->rayDir.x > 0.0) 
@@ -66,6 +76,5 @@ void	draw_texture(t_game *game, t_raycast *rc, int x)
 		rc->texture.tex_pos.x = TEXSIZE - rc->texture.tex_pos.x - 1;
 	rc->texture.tex_start = rc->texture.step * \
 		(rc->draw_start - WIN_HEIGHT / 2 + rc->line_height / 2);
-	rc->texture.img = game->wall_EA;
 	dda_3D(game, rc, x);
 }
