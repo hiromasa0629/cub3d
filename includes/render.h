@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 13:07:10 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 21:04:24 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:21:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ void	draw_3D(t_game *game);
 void	draw_floor_n_ceiling(t_img *img, int color, int start_y, int end_y);
 /* weapon.c */
 void	init_weapon(t_game *game, t_weapons *weapons);
+void	draw_weapon(t_game *game);
 
 #endif

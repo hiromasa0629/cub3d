@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 20:58:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:19:47 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@
 # define A_BTN 0
 # define S_BTN 1
 # define D_BTN 2
+# define E_BTN 14
 # define PLAYER_STEP 0.25
 # define SCALE 20
 # define FOV 66.0

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 21:08:24 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 14:01:35 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	render_frame(t_game *game)
 	draw_3D(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
+	draw_weapon(game);
 	return (0);
 }
 
@@ -93,6 +94,7 @@ int	main(int ac, char **av)
 	// mlx_key_hook(game.mlx, key_hook, &game);
 	// mlx_loop(game.mlx);
 	free_splits(game.map);
+	free(game.weapons.images);
 	// system("leaks cub3d");
 	return (0);
 }

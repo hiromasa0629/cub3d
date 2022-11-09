@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 14:40:36 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:21:01 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,10 @@ int	handle_keypress(int key, t_game *game)
 	if (key == W_BTN || key == S_BTN || key == A_BTN || key == D_BTN)
 		handle_movements(key, game);
 	handle_angle(key, game);
+	if (key == E_BTN && game->weapons.status == CLOSED)
+		game->weapons.status = OPENED;
+	else if (key == E_BTN && game->weapons.status == OPENED)
+		game->weapons.status = CLOSED;
 	set_player_direction(game);
 	return (0);
 }

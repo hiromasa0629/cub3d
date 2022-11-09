@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:39:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 21:30:00 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:24:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,12 +37,15 @@ void	init_weapon(t_game *game, t_weapons *weapons)
 
 void	put_weapon(t_game *game, t_weapons *weapons, int *frame)
 {
-	if (*frame == 0)
-		weapons->status = OPENED;
 	mlx_put_image_to_window(game->mlx, game->win, weapons->images[*frame].img, \
 		weapons->start_pos.x, weapons->start_pos.y);
-	*frame++;
-	if (*frame == 5)
+	if (weapons->status == OPENED)
+		(*frame)++;
+	else if (weapons->status == CLOSED)
+		(*frame)--;
+	if (*frame > 4)
+		*frame = 4;
+	else if (*frame < 0)
 		*frame = 0;
 }
 

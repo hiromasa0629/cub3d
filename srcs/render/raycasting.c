@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/08 18:40:47 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:59:04 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,7 +83,7 @@ void	determine_hit(t_game *game, t_raycast *rc)
 			rc->map_pos.y += rc->step.y;
 			rc->side = 1;
 		}
-		if ((game->map)[rc->map_pos.y][rc->map_pos.x] == '1')
+		if (is_wall(game->map, rc->map_pos))
 			hit = 1;
 	}
 }
@@ -113,6 +113,7 @@ void	draw_rays(t_game *game, t_raycast *rc)
 			rc->deltaDist.y);
 	}
 	dda_line(draw_ray, game);
+	rc->draw_ray = draw_ray;
 }
 
 void	draw_3D(t_game *game)

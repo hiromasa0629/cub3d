@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:55:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 19:06:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 13:50:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,13 +33,13 @@ void	pre_draw_texture(t_game *game, t_raycast *rc)
 t_img	get_texture_img(t_game *game, t_raycast *rc)
 {
 	if (rc->side == 0 && rc->rayDir.x < 0)
-		return (game->wall_EA); // diamond
+		return (game->wall_EA);
 	if (rc->side == 0)
-		return (game->wall_WE); // rickroll
+		return (game->wall_WE);
 	if (rc->side == 1 && rc->rayDir.y < 0)
-		return (game->wall_NO); // wall
+		return (game->wall_NO);
 	if (rc->side == 1)
-		return (game->wall_SO); // bookshelf
+		return (game->wall_SO);
 	return (game->wall_WE);
 }
 
@@ -65,9 +65,10 @@ void	draw_texture(t_game *game, t_raycast *rc, int x)
 	pre_draw_texture(game, rc);
 	rc->texture.img = get_texture_img(game, rc);
 	rc->texture.step = 1.0 * TEXSIZE / rc->line_height;
-	rc->wall.x = game->player_pos.pos.x0 + (rc->perpWallDist * rc->rayDir.x);
 	if (rc->side == 0)
-		rc->wall.x = game->player_pos.pos.y0 + (rc->perpWallDist * rc->rayDir.y);
+		rc->wall.x = rc->draw_ray.y1;
+	else
+		rc->wall.x = rc->draw_ray.x1;
 	rc->wall.x -= (int)rc->wall.x;
 	rc->texture.tex_pos.x = (int)(rc->wall.x * (double)TEXSIZE);
 	if (rc->side == 0 && rc->rayDir.x > 0.0) 
