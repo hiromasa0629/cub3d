@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:25 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 14:00:31 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 19:47:38 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,6 @@ int	is_valid_surrounding(char **lines, int y, int x, int l_no)
 
 void	get_player_deg_n_dir(t_game *game)
 {
-	
 	if (game->player_pos.c == 'E')
 		game->player_pos.angle = 0;
 	else if (game->player_pos.c == 'N')
@@ -62,13 +61,13 @@ int	is_valid_map_component(t_game *game, char **lines)
 {
 	t_int_pos	pos;
 	t_int_pos	player_pos;
-	
-	pos.y = 0;
+
+	pos.y = -1;
 	player_pos.x = -1;
-	while (lines[pos.y])
+	while (lines[++pos.y])
 	{
-		pos.x = 0;
-		while (lines[pos.y][pos.x])
+		pos.x = -1;
+		while (lines[pos.y][++pos.x])
 		{
 			if (!is_map_element(lines, pos))
 				return (0);
@@ -76,9 +75,7 @@ int	is_valid_map_component(t_game *game, char **lines)
 				return (0);
 			if (is_player(lines, pos) && player_pos.x == -1)
 				player_pos = pos;
-			pos.x++;
 		}
-		pos.y++;
 	}
 	if (player_pos.x == -1)
 		return (0);

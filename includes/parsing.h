@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 20:07:46 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:11:05 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:41:58 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int		is_valid_elements(char ***lines);
 int		is_valid_map(t_game *game, char **lines);
 /* validation.c */
 int		is_valid_file_content(t_game *game, char **lines);
+/* parse_save.c */
+int		store_elements(t_game *game, char **lines);
 /* parse.c */
 void	parse(t_game *game, char *map_path);
 

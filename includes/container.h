@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 13:28:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:42:17 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ typedef struct s_player			t_player;
 typedef struct s_double_pos		t_double_pos;
 typedef struct s_raycast		t_raycast;
 typedef struct s_weapons		t_weapons;
+typedef struct s_helper			t_helper;
 
 struct s_color {
 	int	r;
@@ -154,6 +155,14 @@ struct s_raycast {
 	int				draw_end;
 	int				hit;
 	int				side;
+};
+/* Helper */
+struct s_helper {
+	int		line_no;
+	char	**lines;
+	char	*line;
+	int		gnl;
+	int		fd;
 };
 
 
