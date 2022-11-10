@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 14:11:50 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 14:33:39 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:55:01 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	draw_floor_n_ceiling(t_img *img, int color, int start_y, int end_y)
 {
 	t_int_pos	px;
-	
+
 	px.y = start_y;
 	while (px.y < end_y)
 	{

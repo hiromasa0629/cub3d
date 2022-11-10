@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:55:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 13:50:13 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 11:16:47 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ void	pre_draw_texture(t_game *game, t_raycast *rc)
 		rc->draw_start = 0;
 	rc->draw_end = rc->line_height / 2 + WIN_HEIGHT / 2;
 	if (rc->draw_end >= WIN_HEIGHT)
-		rc->draw_end = WIN_HEIGHT - 1;
+		rc->draw_end = WIN_HEIGHT;
 }
 
 t_img	get_texture_img(t_game *game, t_raycast *rc)

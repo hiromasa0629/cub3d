@@ -6,11 +6,16 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 13:21:01 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:58:05 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	check_wall_collision(t_double_pos player_pos, double angle)
+{
+	t_int_pos	pos;
+}
 
 void	handle_movements(int key, t_game *game)
 {

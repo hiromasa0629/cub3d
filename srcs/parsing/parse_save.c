@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:37:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 21:50:08 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:54:27 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	store_wall_value(t_game *game, t_img *img, char *line)
 int	check_n_save_elements(char *s, t_game *game)
 {
 	int	success;
-	
+
 	success = 0;
 	if (ft_strcmp(s, "NO") == 0)
 		success = store_wall_value(game, &(game->wall_NO), s);

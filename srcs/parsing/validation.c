@@ -6,13 +6,13 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 21:13:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:56:58 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/09 21:54:49 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "parsing.h"
 
-int		get_longest_strlen(char **lines)
+int	get_longest_strlen(char **lines)
 {
 	int	i;
 	int	max;
@@ -31,7 +31,7 @@ int		get_longest_strlen(char **lines)
 int	is_valid_file_content(t_game *game, char **lines)
 {
 	char	**tmp;
-	
+
 	tmp = lines;
 	if (!is_valid_elements(&tmp))
 		return (0);
