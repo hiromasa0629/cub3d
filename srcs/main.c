@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:09:50 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:47:55 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,12 @@ int	render_frame(t_game *game)
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	draw_weapon(game);
+	int	x;
+	int	y;
+	
+	mlx_mouse_get_pos(game->mlx, &x, &y);
+	
+	printf("x: %d, y: %d", x, y);
 	return (0);
 }
 
@@ -59,6 +65,7 @@ void	init_game(t_game *game, char *map_path)
 	parse(game, map_path);
 	init_minimap(game);
 	init_weapon(game, &(game->weapons));
+	mlx_mouse_hide();
 	mlx_hook(game->win, 2, 1L << 0, handle_keypress, game);
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
