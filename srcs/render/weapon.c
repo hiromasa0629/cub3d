@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 20:39:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 13:24:44 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:11:16 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	put_weapon(t_game *game, t_weapons *weapons, int *frame)
 void	draw_weapon(t_game *game)
 {
 	static int	frame = 0;
-	
+
 	if (frame < 1)
 		put_weapon(game, &(game->weapons), &frame);
 	else if (frame < 2)
@@ -64,4 +64,3 @@ void	draw_weapon(t_game *game)
 	else if (frame < 5)
 		put_weapon(game, &(game->weapons), &frame);
 }
-

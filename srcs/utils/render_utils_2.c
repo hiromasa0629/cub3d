@@ -6,15 +6,15 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:41:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 21:49:10 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:14:25 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-void my_mlx_pixel_put(t_img *data, int x, int y, int color)
+void	my_mlx_pixel_put(t_img *data, int x, int y, int color)
 {
-	char *dst;
+	char	*dst;
 
 	dst = data->addr + (y * data->size + x * (data->bpp / 8));
 	*(unsigned int *)dst = color;
@@ -30,7 +30,7 @@ void	better_angle(double *angle)
 
 uint32_t	get_tex_color(t_img *data, int x, int y)
 {
-	char *dst;
+	char	*dst;
 
 	dst = data->addr + (y * data->size + x * (data->bpp / 8));
 	return (*(uint32_t *)dst);

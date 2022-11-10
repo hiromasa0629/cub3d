@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:37:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 21:54:27 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:24:52 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ int	check_n_save_elements(char *s, t_game *game)
 
 	success = 0;
 	if (ft_strcmp(s, "NO") == 0)
-		success = store_wall_value(game, &(game->wall_NO), s);
+		success = store_wall_value(game, &(game->wall_no), s);
 	else if (ft_strcmp(s, "SO") == 0)
-		success = store_wall_value(game, &(game->wall_SO), s);
+		success = store_wall_value(game, &(game->wall_so), s);
 	else if (ft_strcmp(s, "WE") == 0)
-		success = store_wall_value(game, &(game->wall_WE), s);
+		success = store_wall_value(game, &(game->wall_we), s);
 	else if (ft_strcmp(s, "EA") == 0)
-		success = store_wall_value(game, &(game->wall_EA), s);
+		success = store_wall_value(game, &(game->wall_ea), s);
 	else if (ft_strcmp(s, "F") == 0)
 		success = store_color_value(&(game->f_color), s);
 	else if (ft_strcmp(s, "C") == 0)

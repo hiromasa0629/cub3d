@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 13:19:47 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:32:09 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,6 @@
 /* Minimap max px */
 # define MI_PX_WIDTH 200
 # define MI_PX_HEIGHT 200
-/* Floor/Ceiling size */
-# define FC_WIDTH WIN_WIDTH / 2
-# define FC_HEIGHT WIN_HEIGHT / 2
 /* Colors */
 # define GREEN 0x7FFF00
 # define WHITE 0xFFFFFF

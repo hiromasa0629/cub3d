@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:55:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 11:16:47 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:31:12 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,13 +15,13 @@
 void	pre_draw_texture(t_game *game, t_raycast *rc)
 {
 	double	ca;
-	
-	rc->perpWallDist = (rc->sideDist.y - rc->deltaDist.y);
+
+	rc->perpwalldist = (rc->sidedist.y - rc->deltadist.y);
 	if (rc->side == 0)
-		rc->perpWallDist = (rc->sideDist.x - rc->deltaDist.x);
+		rc->perpwalldist = (rc->sidedist.x - rc->deltadist.x);
 	ca = game->player_pos.angle - rc->angle;
 	better_angle(&ca);
-	rc->line_height = WIN_HEIGHT / (rc->perpWallDist * cos(deg_to_rad(ca)));
+	rc->line_height = WIN_HEIGHT / (rc->perpwalldist * cos(deg_to_rad(ca)));
 	rc->draw_start = -rc->line_height / 2 + WIN_HEIGHT / 2;
 	if (rc->draw_start < 0)
 		rc->draw_start = 0;
@@ -32,22 +32,22 @@ void	pre_draw_texture(t_game *game, t_raycast *rc)
 
 t_img	get_texture_img(t_game *game, t_raycast *rc)
 {
-	if (rc->side == 0 && rc->rayDir.x < 0)
-		return (game->wall_EA);
+	if (rc->side == 0 && rc->raydir.x < 0)
+		return (game->wall_ea);
 	if (rc->side == 0)
-		return (game->wall_WE);
-	if (rc->side == 1 && rc->rayDir.y < 0)
-		return (game->wall_NO);
+		return (game->wall_we);
+	if (rc->side == 1 && rc->raydir.y < 0)
+		return (game->wall_no);
 	if (rc->side == 1)
-		return (game->wall_SO);
-	return (game->wall_WE);
+		return (game->wall_so);
+	return (game->wall_we);
 }
 
-void	dda_3D(t_game *game, t_raycast *rc, int x)
+void	dda_3d(t_game *game, t_raycast *rc, int x)
 {
 	uint32_t	color;
-	int y;
-	
+	int			y;
+
 	y = rc->draw_start;
 	while (y < rc->draw_end)
 	{
@@ -71,11 +71,11 @@ void	draw_texture(t_game *game, t_raycast *rc, int x)
 		rc->wall.x = rc->draw_ray.x1;
 	rc->wall.x -= (int)rc->wall.x;
 	rc->texture.tex_pos.x = (int)(rc->wall.x * (double)TEXSIZE);
-	if (rc->side == 0 && rc->rayDir.x > 0.0) 
+	if (rc->side == 0 && rc->raydir.x > 0.0)
 		rc->texture.tex_pos.x = TEXSIZE - rc->texture.tex_pos.x - 1;
-	if (rc->side == 1 && rc->rayDir.y < 0.0) 
+	if (rc->side == 1 && rc->raydir.y < 0.0)
 		rc->texture.tex_pos.x = TEXSIZE - rc->texture.tex_pos.x - 1;
 	rc->texture.tex_start = rc->texture.step * \
 		(rc->draw_start - WIN_HEIGHT / 2 + rc->line_height / 2);
-	dda_3D(game, rc, x);
+	dda_3d(game, rc, x);
 }

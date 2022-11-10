@@ -6,17 +6,17 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 21:42:17 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:30:34 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef CONTAINER_H
 # define CONTAINER_H
 
-typedef	struct s_game			t_game;
+typedef struct s_game			t_game;
 typedef struct s_elements		t_elements;
 typedef struct s_map_validation	t_map_validation;
-typedef	struct s_int_pos		t_int_pos;
+typedef struct s_int_pos		t_int_pos;
 typedef struct s_img			t_img;
 typedef struct s_color			t_color;
 typedef struct s_minimap		t_minimap;
@@ -31,7 +31,7 @@ typedef struct s_helper			t_helper;
 struct s_color {
 	int	r;
 	int	g;
-	int b;
+	int	b;
 };
 
 struct s_img {
@@ -64,10 +64,10 @@ struct s_texture {
 
 struct s_matrix
 {
-	double x0;
-	double x1;
-	double y0;
-	double y1;
+	double	x0;
+	double	x1;
+	double	y0;
+	double	y1;
 };
 
 struct s_player
@@ -79,15 +79,12 @@ struct s_player
 
 struct s_minimap
 {
-	t_img img;
-	t_matrix		player_pos; // player_pos to facing direction
-	double			player_angle; // in degree
+	t_img			img;
+	t_matrix		player_pos;
+	double			player_angle;
 	t_int_pos		size;
 	t_int_pos		pxsize;
 	t_double_pos	start;
-	int line_len;
-	double player_delta_x;
-	double player_delta_y;
 };
 
 struct s_weapons {
@@ -104,10 +101,10 @@ struct s_game {
 	char		**map;
 	int			f_color;
 	int			c_color;
-	t_img		wall_NO;
-	t_img		wall_SO;
-	t_img		wall_EA;
-	t_img		wall_WE;
+	t_img		wall_no;
+	t_img		wall_so;
+	t_img		wall_ea;
+	t_img		wall_we;
 	t_int_pos	map_size;
 	t_minimap	minimap;
 	t_player	player_pos;
@@ -119,12 +116,12 @@ struct s_game {
 	by defining a static struct
 */
 struct s_elements {
-	int	had_NO;
-	int	had_SO;
-	int	had_WE;
-	int	had_EA;
-	int	had_F;
-	int	had_C;
+	int	had_no;
+	int	had_so;
+	int	had_we;
+	int	had_ea;
+	int	had_f;
+	int	had_c;
 };
 /* For checking space surrounding */
 struct s_map_validation {
@@ -143,12 +140,12 @@ struct s_raycast {
 	t_int_pos		map_pos;
 	t_int_pos		step;
 	t_int_pos		ray_deduct;
-	t_double_pos	rayDir;
-	t_double_pos	sideDist;
-	t_double_pos	deltaDist;
+	t_double_pos	raydir;
+	t_double_pos	sidedist;
+	t_double_pos	deltadist;
 	t_double_pos	wall;
 	t_texture		texture;
-	double			perpWallDist;
+	double			perpwalldist;
 	double			angle;
 	int				line_height;
 	int				draw_start;
@@ -164,6 +161,5 @@ struct s_helper {
 	int		gnl;
 	int		fd;
 };
-
 
 #endif

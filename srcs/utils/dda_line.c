@@ -6,13 +6,13 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:42:48 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/08 11:55:04 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:11:50 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-double get_max(double x_step, double y_step)
+double	get_max(double x_step, double y_step)
 {
 	if (fabs(x_step) > fabs(y_step))
 		return (fabs(x_step));
@@ -20,7 +20,7 @@ double get_max(double x_step, double y_step)
 		return (fabs(y_step));
 }
 
-t_matrix scale(t_matrix matrix)
+t_matrix	scale(t_matrix matrix)
 {
 	matrix.x0 = matrix.x0 * SCALE;
 	matrix.x1 = matrix.x1 * SCALE;
@@ -29,7 +29,7 @@ t_matrix scale(t_matrix matrix)
 	return (matrix);
 }
 
-t_matrix centralize(t_matrix matrix, t_game *game)
+t_matrix	centralize(t_matrix matrix, t_game *game)
 {
 	matrix.x0 -= game->minimap.start.x;
 	matrix.x1 -= game->minimap.start.x;
@@ -47,7 +47,7 @@ int	within_minimap_size(t_matrix matrix, t_game *game)
 	return (0);
 }
 
-void dda_line(t_matrix matrix, t_game *game)
+void	dda_line(t_matrix matrix, t_game *game)
 {
 	double		x_step;
 	double		y_step;

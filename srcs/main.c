@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 19:44:06 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:09:50 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	render_frame(t_game *game)
 	draw_floor_n_ceiling(&(game->img_3d), game->f_color, \
 							WIN_HEIGHT / 2, WIN_HEIGHT);
 	draw_minimap(game);
-	draw_3D(game);
+	draw_3d(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	draw_weapon(game);

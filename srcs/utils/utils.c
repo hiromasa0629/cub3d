@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:47:20 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 21:08:39 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:14:14 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	ft_strncmp(const char *s1, const char *s2, size_t n)
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	unsigned int	i;
-	
+
 	i = 0;
 	while (s1[i] && s2[i])
 	{

@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/20 22:00:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/05 20:58:54 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/10 17:26:53 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,25 +16,25 @@ int	is_duplicated_element(char *s)
 {
 	static t_elements	el = {0, 0, 0, 0, 0, 0};
 
-	if (((ft_strcmp(s, "NO") == 0) && el.had_NO) || \
-		((ft_strcmp(s, "SO") == 0) && el.had_SO) || \
-		((ft_strcmp(s, "WE") == 0) && el.had_WE) || \
-		((ft_strcmp(s, "EA") == 0) && el.had_EA) || \
-		((ft_strcmp(s, "F") == 0) && el.had_F) || \
-		((ft_strcmp(s, "C") == 0) && el.had_C))
+	if (((ft_strcmp(s, "NO") == 0) && el.had_no) || \
+		((ft_strcmp(s, "SO") == 0) && el.had_so) || \
+		((ft_strcmp(s, "WE") == 0) && el.had_we) || \
+		((ft_strcmp(s, "EA") == 0) && el.had_ea) || \
+		((ft_strcmp(s, "F") == 0) && el.had_f) || \
+		((ft_strcmp(s, "C") == 0) && el.had_c))
 		return (1);
 	if (ft_strcmp(s, "NO") == 0)
-		el.had_NO = 1;
+		el.had_no = 1;
 	else if (ft_strcmp(s, "SO") == 0)
-		el.had_SO = 1;
+		el.had_so = 1;
 	else if (ft_strcmp(s, "WE") == 0)
-		el.had_WE = 1;
+		el.had_we = 1;
 	else if (ft_strcmp(s, "EA") == 0)
-		el.had_EA = 1;
+		el.had_ea = 1;
 	else if (ft_strcmp(s, "F") == 0)
-		el.had_F = 1;
+		el.had_f = 1;
 	else if (ft_strcmp(s, "C") == 0)
-		el.had_C = 1;
+		el.had_c = 1;
 	return (0);
 }
 
