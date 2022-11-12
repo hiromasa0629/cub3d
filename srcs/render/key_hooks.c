@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 18:07:54 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:11:40 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ void	handle_angle(int key, t_game *game)
 int	handle_pause(t_game *game)
 {
 	int	is_paused;
-	
+
 	is_paused = 0;
 	if (!game->paused)
 	{

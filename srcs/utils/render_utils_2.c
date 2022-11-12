@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:41:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:58:31 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:12:20 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	save_new_paused_screen(t_game *game)
 {
 	t_int_pos	px;
 	t_color		rgb;
-	
+
 	px.y = -1;
 	while (++px.y < WIN_HEIGHT)
 	{

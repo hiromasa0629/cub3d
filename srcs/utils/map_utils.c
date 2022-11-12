@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:41:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:38:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:12:13 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ int	is_space(char **lines, t_int_pos pos)
 
 int	is_wall(char **lines, t_int_pos pos)
 {
-
 	if (lines[pos.y][pos.x] == '1')
 		return (1);
 	return (0);

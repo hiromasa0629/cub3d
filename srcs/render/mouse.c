@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/12 16:50:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 18:07:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:11:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	handle_mouse(t_game *game)
 {
 	t_int_pos	mouse_pos;
 	int			diff;
-	
+
 	mouse_pos.y = 0;
 	mouse_pos.x = 0;
 	mlx_mouse_get_pos(game->win, &(mouse_pos.x), &(mouse_pos.y));
