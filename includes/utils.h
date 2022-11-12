@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/07 21:49:45 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 17:58:57 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,14 @@ double		deg_to_rad(double degree);
 void		my_mlx_pixel_put(t_img *data, int x, int y, int color);
 void		better_angle(double *angle);
 uint32_t	get_tex_color(t_img *data, int x, int y);
+void		destroy_all_images(t_game *game);
+void		save_new_paused_screen(t_game *game);
+/* color_utils.c */
+t_color		int_to_rgb(uint32_t color);
+t_color		darker_rgb(t_color rgb);
+uint32_t	rgb_to_int(t_color rgb);
 /* exit.c */
 void		exit_error(const char *s);
+int			exit_hook(t_game *game);
+
 #endif

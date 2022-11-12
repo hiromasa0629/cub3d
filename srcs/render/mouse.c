@@ -1,28 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exit.c                                             :+:      :+:    :+:   */
+/*   mouse.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/10/19 19:57:16 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:28:40 by hyap             ###   ########.fr       */
+/*   Created: 2022/11/12 16:50:41 by hyap              #+#    #+#             */
+/*   Updated: 2022/11/12 18:07:20 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "utils.h"
+#include "main.h"
 
-void	exit_error(const char *s)
+void	handle_mouse(t_game *game)
 {
-	printf("Error\n%s", s);
-	exit(1);
-}
-
-int	exit_hook(t_game *game)
-{
-	destroy_all_images(game);
-	mlx_destroy_window(game->mlx, game->win);
-	free_splits(game->map);
-	system("leaks cub3d");
-	exit(0);
+	t_int_pos	mouse_pos;
+	int			diff;
+	
+	mouse_pos.y = 0;
+	mouse_pos.x = 0;
+	mlx_mouse_get_pos(game->win, &(mouse_pos.x), &(mouse_pos.y));
+	diff = game->prev_mouse_x - mouse_pos.x;
+	game->player_pos.angle += (diff / 5);
+	better_angle(&(game->player_pos.angle));
+	mlx_mouse_move(game->win, game->prev_mouse_x, WIN_HEIGHT / 2);
 }

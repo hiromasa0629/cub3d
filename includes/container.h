@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:30:34 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 17:35:35 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,6 +110,9 @@ struct s_game {
 	t_player	player_pos;
 	t_img		img_3d;
 	t_weapons	weapons;
+	int			prev_mouse_x;
+	int			paused;
+	t_img		paused_img;
 };
 
 /* For checking duplicated elements 

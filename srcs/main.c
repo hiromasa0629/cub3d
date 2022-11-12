@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:47:55 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:03:27 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ void	init_minimap(t_game *game)
 	save_img_addr(&(game->minimap.img));
 	game->img_3d.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	save_img_addr(&(game->img_3d));
+	game->paused_img.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	save_img_addr(&(game->paused_img));
 	draw_floor_n_ceiling(&(game->img_3d), game->c_color, 0, WIN_HEIGHT / 2);
 	draw_floor_n_ceiling(&(game->img_3d), game->f_color, \
 							WIN_HEIGHT / 2, WIN_HEIGHT);
@@ -34,6 +36,8 @@ void	init_minimap(t_game *game)
 
 int	render_frame(t_game *game)
 {
+	if (game->paused)
+		return (0);
 	mlx_destroy_image(game->mlx, game->minimap.img.img);
 	mlx_destroy_image(game->mlx, game->img_3d.img);
 	game->minimap.img.img = mlx_new_image(game->mlx, game->minimap.pxsize.x, \
@@ -44,17 +48,12 @@ int	render_frame(t_game *game)
 	draw_floor_n_ceiling(&(game->img_3d), game->c_color, 0, WIN_HEIGHT / 2);
 	draw_floor_n_ceiling(&(game->img_3d), game->f_color, \
 							WIN_HEIGHT / 2, WIN_HEIGHT);
+	handle_mouse(game);
 	draw_minimap(game);
 	draw_3d(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	draw_weapon(game);
-	int	x;
-	int	y;
-	
-	mlx_mouse_get_pos(game->mlx, &x, &y);
-	
-	printf("x: %d, y: %d", x, y);
 	return (0);
 }
 
@@ -65,8 +64,12 @@ void	init_game(t_game *game, char *map_path)
 	parse(game, map_path);
 	init_minimap(game);
 	init_weapon(game, &(game->weapons));
+	game->paused = 0;
+	mlx_mouse_move(game->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
+	game->prev_mouse_x = WIN_WIDTH / 2;
 	mlx_mouse_hide();
 	mlx_hook(game->win, 2, 1L << 0, handle_keypress, game);
+	mlx_hook(game->win, 17, 0L, exit_hook, game);
 	mlx_loop_hook(game->mlx, render_frame, game);
 	mlx_loop(game->mlx);
 }

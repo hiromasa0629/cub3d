@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:20:38 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/12 18:07:54 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,41 @@ void	handle_angle(int key, t_game *game)
 	}
 }
 
+int	handle_pause(t_game *game)
+{
+	int	is_paused;
+	
+	is_paused = 0;
+	if (!game->paused)
+	{
+		is_paused = 1;
+		game->paused = 1;
+		mlx_mouse_show();
+		mlx_destroy_image(game->mlx, game->paused_img.img);
+		game->paused_img.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+		save_img_addr(&(game->paused_img));
+		save_new_paused_screen(game);
+		mlx_put_image_to_window(game->mlx, game->win, game->paused_img.img, \
+									0, 0);
+	}
+	else
+	{
+		is_paused = 0;
+		game->paused = 0;
+		mlx_mouse_hide();
+		mlx_mouse_move(game->win, game->prev_mouse_x, WIN_HEIGHT / 2);
+		mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
+	}
+	return (is_paused);
+}
+
 int	handle_keypress(int key, t_game *game)
 {
+	if (key == P_BTN)
+		if (handle_pause(game))
+			return (0);
+	if (key == ESC_BTN)
+		exit_hook(game);
 	if (key == W_BTN || key == S_BTN || key == A_BTN || key == D_BTN)
 		handle_movements(key, game);
 	handle_angle(key, game);
