@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:35:12 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 18:44:01 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@
 # define BLACK 0x000000
 # define RED 0xFF0000
 # define ORANGE 0xFC9403
+# define GREY 0x808080
 /* Images */
 # define _MINIMAP_IMG 1
 # define _FLOOR_IMG 2

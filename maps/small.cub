@@ -1,19 +1,19 @@
-NO ./assets/Wall.xpm
-SO ./assets/Wall.xpm
-WE ./assets/Wall.xpm
-EA ./assets/Wall.xpm
+NO ./assets/wall_NO.xpm
+SO ./assets/wall_SO.xpm
+WE ./assets/wall_WE.xpm
+EA ./assets/wall_EA.xpm
 
-F 255,100,0
-C 225,30,0
+F 0,0,0
+C 100,0,0
 
 1111111
 100000111
 100011001
 111110001
     10011111
-    1111
+    1211
     1001
-11111111
+11111211
 11 11001
-11110001
+1111S001
 11111111

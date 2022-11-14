@@ -12,7 +12,9 @@ INVALID_FILES=(\
 	"invalid_el(color_overflow).cub" \
 	"invalid_el(element).cub" \
 	"invalid_el(map_order).cub" \
-	"invalid_el(dup).cub"
+	"invalid_el(dup).cub" \
+	".cub" \
+	"nocub"
 )
 	
 INVALID_MAP=(\

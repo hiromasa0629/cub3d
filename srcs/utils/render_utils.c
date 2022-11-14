@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/05 21:50:56 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:41 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 18:44:11 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,8 +50,10 @@ int	get_color(char **map, t_double_pos dpos)
 	pos.x = dpos.x;
 	pos.y = dpos.y;
 	if (is_wall_door(map, pos))
-		return (GREEN);
-	return (WHITE);
+		return (GREY);
+	if (is_floor(map, pos) || is_player(map, pos))
+		return (WHITE);
+	return (0);
 }
 
 void	save_img_addr(t_img *img)
