@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:27:17 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 16:12:21 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 16:16:50 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ static void	frame_door_open_close(t_game *game)
 
 	x = -1;
 	draw_3d(game);
-	mlx_destroy_image(game->mlx, game->frame_door_close.img);
-	mlx_destroy_image(game->mlx, game->frame_door_open.img);
 	game->frame_door_close = copy_image(game, game->img_3d);
 	reset_img(game);
 	while (++x < WIN_WIDTH)
@@ -71,6 +69,8 @@ static void	opening_closing_door(t_game *game, t_raycast *rc, int handle_door)
 {
 	static double	frame = 0.1;
 
+	mlx_destroy_image(game->mlx, game->frame_door_close.img);
+	mlx_destroy_image(game->mlx, game->frame_door_open.img);
 	frame_door_open_close(game);
 	if (frame < 1.0)
 		single_door_frame(game, frame);
