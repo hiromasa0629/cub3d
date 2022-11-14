@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 21:37:44 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:24:52 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:07:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,6 @@ int	store_elements(t_game *game, char **lines)
 
 	limit = get_splits_no(lines) - game->map_size.y;
 	i = 0;
-	printf("limit: %d\n", limit);
 	while (i < limit)
 	{
 		while (lines[i][0] == '\0')
