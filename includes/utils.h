@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:23 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 14:59:57 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,8 @@ t_color		int_to_rgb(uint32_t color);
 t_color		darker_rgb(t_color rgb);
 uint32_t	rgb_to_int(t_color rgb);
 /* image_utils.c */
-int			get_img_transparent(t_color *first, t_color *second, double percent);
+int			get_img_transparent(t_color *first, \
+								t_color *second, double percent);
 t_img		copy_image(t_game *game, t_img img);
 void		reset_img(t_game *game);
 /* door_utils.c */

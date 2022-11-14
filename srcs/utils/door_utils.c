@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:38:22 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 14:08:44 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 15:16:57 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
 
-int is_player_facing_door(t_game *game, t_raycast *rc)
+int	is_player_facing_door(t_game *game, t_raycast *rc)
 {
-	double dist;
-	t_matrix *draw_ray;
-	int elem;
+	double		dist;
+	t_matrix	*draw_ray;
+	int			elem;
 
 	rc->angle = game->player_pos.angle;
 	draw_ray = &rc->draw_ray;
@@ -26,19 +26,20 @@ int is_player_facing_door(t_game *game, t_raycast *rc)
 	if (elem == 2 || elem == 3)
 	{
 		draw_rays(game, rc);
-		dist = sqrt((fabs(ft_sqr(draw_ray->x1 - draw_ray->x0)) + fabs(ft_sqr(draw_ray->y1 - draw_ray->y0))));
+		dist = sqrt((fabs(ft_sqr(draw_ray->x1 - draw_ray->x0)) \
+				+ fabs(ft_sqr(draw_ray->y1 - draw_ray->y0))));
 		if (dist <= 3.0)
 			return (1);
 	}
 	return (0);
 }
 
-void dda_door_3d(t_game *game, t_raycast *rc, int x, double percent)
+void	dda_door_3d(t_game *game, t_raycast *rc, int x, double percent)
 {
-	t_color bg_color;
-	t_color door_color;
-	uint32_t color;
-	int y;
+	t_color		bg_color;
+	t_color		door_color;
+	uint32_t	color;
+	int			y;
 
 	y = rc->draw_start;
 	while (y < rc->draw_end)

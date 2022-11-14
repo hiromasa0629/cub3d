@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:29:45 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 15:20:26 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,9 +51,9 @@ int	render_frame(t_game *game)
 	handle_mouse(game);
 	draw_minimap(game);
 	if (game->door_status == DOOR_OPEN || game->door_status == DOOR_CLOSE)
-        handle_door(game);
-    else
-        draw_3d(game);
+		handle_door(game);
+	else
+		draw_3d(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	draw_weapon(game);
@@ -69,7 +69,8 @@ void	init_game(t_game *game, char *map_path)
 	game->door_status = DOOR_CLOSED;
 	init_weapon(game, &(game->weapons));
 	game->paused = 0;
-	game->frame_door_close.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	game->frame_door_close.img = mlx_new_image(game->mlx, WIN_WIDTH, \
+												WIN_HEIGHT);
 	save_img_addr(&(game->frame_door_close));
 	game->frame_door_open.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
 	save_img_addr(&(game->frame_door_open));
@@ -88,7 +89,7 @@ int	main(int ac, char **av)
 
 	if (ac != 2)
 	{
-		printf("./cub3d <path_to_map>\n");
+		printf("./cub3D <path_to_map>\n");
 		return (0);
 	}
 	init_game(&game, av[1]);

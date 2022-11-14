@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   container.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:57:22 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 14:57:51 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@ typedef struct s_raycast		t_raycast;
 typedef struct s_weapons		t_weapons;
 typedef struct s_helper			t_helper;
 
-enum door_status
+enum e_door_status
 {
-    DOOR_OPEN,
-    DOOR_OPENED,
-    DOOR_CLOSE,
-    DOOR_CLOSED,
+	DOOR_OPEN,
+	DOOR_OPENED,
+	DOOR_CLOSE,
+	DOOR_CLOSED,
 };
 
 struct s_color {

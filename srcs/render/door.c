@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:27:17 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 13:39:52 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 15:05:30 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ static void	frame_door_open_close(t_game *game)
 	reset_img(game);
 	while (++x < WIN_WIDTH)
 	{
-		rc.angle = (double)(game->player_pos.angle + (FOV / 2)) -
-				   ((double)x * (FOV / WIN_WIDTH));
+		rc.angle = (double)(game->player_pos.angle + (FOV / 2)) \
+					- ((double)x * (FOV / WIN_WIDTH));
 		better_angle(&(rc.angle));
 		init_raycast(game, &rc);
 		set_side_dist(game, &rc);
@@ -41,17 +41,17 @@ static void	frame_door_open_close(t_game *game)
 	game->frame_door_open = copy_image(game, game->img_3d);
 }
 
-static void single_door_frame(t_game *game, double percent)
+static void	single_door_frame(t_game *game, double percent)
 {
-	t_raycast rc_door;
-	int x;
-	int elem;
+	t_raycast	rc_door;
+	int			x;
+	int			elem;
 
 	x = -1;
 	while (++x < WIN_WIDTH)
 	{
-		rc_door.angle = (double)(game->player_pos.angle + (FOV / 2)) -
-						((double)x * (FOV / WIN_WIDTH));
+		rc_door.angle = (double)(game->player_pos.angle + (FOV / 2)) \
+						- ((double)x * (FOV / WIN_WIDTH));
 		better_angle(&(rc_door.angle));
 		init_raycast(game, &rc_door);
 		set_side_dist(game, &rc_door);
@@ -65,10 +65,11 @@ static void single_door_frame(t_game *game, double percent)
 	}
 }
 
-static void opening_closing_door(t_game *game, t_raycast *rc, int handle_door)
+static void	opening_closing_door(t_game *game, t_raycast *rc, int handle_door)
 {
-	static double frame = 0.1;
+	static double	frame;
 
+	frame = 0.1;
 	frame_door_open_close(game);
 	if (frame < 1.0)
 		single_door_frame(game, frame);
@@ -89,12 +90,12 @@ static void opening_closing_door(t_game *game, t_raycast *rc, int handle_door)
 	}
 }
 
-void handle_door(t_game *game)
+void	handle_door(t_game *game)
 {
-	t_raycast rc;
-	int x;
-	char door_char;
-	bool facing_door;
+	t_raycast	rc;
+	int			x;
+	char		door_char;
+	bool		facing_door;
 
 	x = -1;
 	facing_door = is_player_facing_door(game, &rc);

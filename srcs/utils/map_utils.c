@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   map_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
+/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/21 10:41:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 13:52:35 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 15:19:07 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,15 @@ int	is_space(char **lines, t_int_pos pos)
 	return (0);
 }
 
-int    is_wall_door(char **lines, t_int_pos pos)
+int	is_wall_door(char **lines, t_int_pos pos)
 {
-    if (lines[pos.y][pos.x] == '1')
-        return (1);
-    else if (lines[pos.y][pos.x] == '2')
-        return (2);
-    else if (lines[pos.y][pos.x] == '3')
-        return (3);
-    return (0);
+	if (lines[pos.y][pos.x] == '1')
+		return (1);
+	else if (lines[pos.y][pos.x] == '2')
+		return (2);
+	else if (lines[pos.y][pos.x] == '3')
+		return (3);
+	return (0);
 }
 
 int	is_player(char **lines, t_int_pos pos)
