@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:27:17 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 15:28:20 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/14 16:12:21 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,8 @@ static void	frame_door_open_close(t_game *game)
 					- ((double)x * (FOV / WIN_WIDTH));
 		better_angle(&(rc.angle));
 		init_raycast(game, &rc);
-		set_side_dist(game, &rc);
+		set_side_dist_x(game, &rc);
+		set_side_dist_y(game, &rc);
 		elem = determine_hit(game, &rc, true);
 		if (elem == 2)
 			elem = determine_hit(game, &rc, false);
@@ -54,7 +55,8 @@ static void	single_door_frame(t_game *game, double percent)
 						- ((double)x * (FOV / WIN_WIDTH));
 		better_angle(&(rc_door.angle));
 		init_raycast(game, &rc_door);
-		set_side_dist(game, &rc_door);
+		set_side_dist_x(game, &rc_door);
+		set_side_dist_y(game, &rc_door);
 		elem = determine_hit(game, &rc_door, true);
 		draw_rays(game, &rc_door);
 		draw_texture(game, &rc_door, elem);

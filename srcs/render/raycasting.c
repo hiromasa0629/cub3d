@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/28 19:44:33 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 15:12:22 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/14 16:11:09 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	init_raycast(t_game *game, t_raycast *rc)
 		rc->deltadist.y = 1e30;
 }
 
-void	set_side_dist(t_game *game, t_raycast *rc)
+void	set_side_dist_x(t_game *game, t_raycast *rc)
 {
 	if (rc->raydir.x < 0)
 	{
@@ -44,7 +44,11 @@ void	set_side_dist(t_game *game, t_raycast *rc)
 		rc->step.x = 1;
 		rc->sidedist.x = (rc->map_pos.x + 1.0 - game->player_pos.pos.x0) \
 						* rc->deltadist.x;
-	}
+	}	
+}
+
+void	set_side_dist_y(t_game *game, t_raycast *rc)
+{
 	if (rc->raydir.y < 0)
 	{
 		rc->step.y = 1;
@@ -87,30 +91,6 @@ int	determine_hit(t_game *game, t_raycast *rc, bool close_door)
 	return (elem);
 }
 
-void	draw_rays(t_game *game, t_raycast *rc)
-{
-	t_matrix	draw_ray;
-
-	draw_ray.x0 = game->player_pos.pos.x0;
-	draw_ray.y0 = game->player_pos.pos.y0;
-	if (rc->side == 0)
-	{
-		draw_ray.x1 = draw_ray.x0 + (rc->raydir.x * fabs(rc->map_pos.x \
-					- draw_ray.x0 + rc->ray_deduct.x) * rc->deltadist.x);
-		draw_ray.y1 = draw_ray.y0 - (rc->raydir.y * fabs(rc->map_pos.x \
-					- draw_ray.x0 + rc->ray_deduct.x) * rc->deltadist.x);
-	}
-	else
-	{
-		draw_ray.x1 = draw_ray.x0 + (rc->raydir.x * fabs(rc->map_pos.y \
-					- draw_ray.y0 + rc->ray_deduct.y) * rc->deltadist.y);
-		draw_ray.y1 = draw_ray.y0 - (rc->raydir.y * fabs(rc->map_pos.y \
-					- draw_ray.y0 + rc->ray_deduct.y) * rc->deltadist.y);
-	}
-	dda_line(draw_ray, game);
-	rc->draw_ray = draw_ray;
-}
-
 void	draw_3d(t_game *game)
 {
 	int			x;
@@ -124,7 +104,8 @@ void	draw_3d(t_game *game)
 					- ((double)x * (FOV / WIN_WIDTH));
 		better_angle(&(rc.angle));
 		init_raycast(game, &rc);
-		set_side_dist(game, &rc);
+		set_side_dist_x(game, &rc);
+		set_side_dist_y(game, &rc);
 		elem = determine_hit(game, &rc, false);
 		draw_rays(game, &rc);
 		draw_texture(game, &rc, elem);

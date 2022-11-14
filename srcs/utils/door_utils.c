@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   door_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 12:38:22 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 15:16:57 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/14 16:12:00 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,8 @@ int	is_player_facing_door(t_game *game, t_raycast *rc)
 	rc->angle = game->player_pos.angle;
 	draw_ray = &rc->draw_ray;
 	init_raycast(game, rc);
-	set_side_dist(game, rc);
+	set_side_dist_x(game, rc);
+	set_side_dist_y(game, rc);
 	elem = determine_hit(game, rc, true);
 	if (elem == 2 || elem == 3)
 	{

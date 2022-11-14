@@ -3,14 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   raycasting_texture.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 13:55:27 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/14 15:15:43 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/14 16:09:49 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "main.h"
+
+void	draw_rays(t_game *game, t_raycast *rc)
+{
+	t_matrix	draw_ray;
+
+	draw_ray.x0 = game->player_pos.pos.x0;
+	draw_ray.y0 = game->player_pos.pos.y0;
+	if (rc->side == 0)
+	{
+		draw_ray.x1 = draw_ray.x0 + (rc->raydir.x * fabs(rc->map_pos.x \
+					- draw_ray.x0 + rc->ray_deduct.x) * rc->deltadist.x);
+		draw_ray.y1 = draw_ray.y0 - (rc->raydir.y * fabs(rc->map_pos.x \
+					- draw_ray.x0 + rc->ray_deduct.x) * rc->deltadist.x);
+	}
+	else
+	{
+		draw_ray.x1 = draw_ray.x0 + (rc->raydir.x * fabs(rc->map_pos.y \
+					- draw_ray.y0 + rc->ray_deduct.y) * rc->deltadist.y);
+		draw_ray.y1 = draw_ray.y0 - (rc->raydir.y * fabs(rc->map_pos.y \
+					- draw_ray.y0 + rc->ray_deduct.y) * rc->deltadist.y);
+	}
+	dda_line(draw_ray, game);
+	rc->draw_ray = draw_ray;
+}
 
 void	pre_draw_texture(t_game *game, t_raycast *rc)
 {
