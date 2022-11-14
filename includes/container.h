@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:09:53 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:35:35 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:57:22 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,14 @@ typedef struct s_double_pos		t_double_pos;
 typedef struct s_raycast		t_raycast;
 typedef struct s_weapons		t_weapons;
 typedef struct s_helper			t_helper;
+
+enum door_status
+{
+    DOOR_OPEN,
+    DOOR_OPENED,
+    DOOR_CLOSE,
+    DOOR_CLOSED,
+};
 
 struct s_color {
 	int	r;
@@ -113,6 +121,10 @@ struct s_game {
 	int			prev_mouse_x;
 	int			paused;
 	t_img		paused_img;
+	int			door_status;
+	t_img		frame_door_close;
+	t_img		frame_door_open;
+	t_img		door;
 };
 
 /* For checking duplicated elements 

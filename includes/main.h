@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:16:41 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:23:15 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:35:12 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <fcntl.h>
 # include <errno.h>
 # include <math.h>
+# include <stdbool.h>
 # include "mlx.h"
 # include "get_next_line_bonus.h"
 # include "container.h"
@@ -33,6 +34,8 @@
 # define S_BTN 1
 # define D_BTN 2
 # define E_BTN 14
+# define OPEN_DOOR_BTN 126
+# define CLOSE_DOOR_BTN 125
 # define ESC_BTN 53
 # define P_BTN 35
 # define PLAYER_STEP 0.25

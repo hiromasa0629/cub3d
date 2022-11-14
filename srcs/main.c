@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 16:05:51 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 18:03:27 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:29:45 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,10 @@ int	render_frame(t_game *game)
 							WIN_HEIGHT / 2, WIN_HEIGHT);
 	handle_mouse(game);
 	draw_minimap(game);
-	draw_3d(game);
+	if (game->door_status == DOOR_OPEN || game->door_status == DOOR_CLOSE)
+        handle_door(game);
+    else
+        draw_3d(game);
 	mlx_put_image_to_window(game->mlx, game->win, game->img_3d.img, 0, 0);
 	mlx_put_image_to_window(game->mlx, game->win, game->minimap.img.img, 0, 0);
 	draw_weapon(game);
@@ -63,8 +66,13 @@ void	init_game(t_game *game, char *map_path)
 	game->win = mlx_new_window(game->mlx, WIN_WIDTH, WIN_HEIGHT, "Cub3d");
 	parse(game, map_path);
 	init_minimap(game);
+	game->door_status = DOOR_CLOSED;
 	init_weapon(game, &(game->weapons));
 	game->paused = 0;
+	game->frame_door_close.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	save_img_addr(&(game->frame_door_close));
+	game->frame_door_open.img = mlx_new_image(game->mlx, WIN_WIDTH, WIN_HEIGHT);
+	save_img_addr(&(game->frame_door_open));
 	mlx_mouse_move(game->win, WIN_WIDTH / 2, WIN_HEIGHT / 2);
 	game->prev_mouse_x = WIN_WIDTH / 2;
 	mlx_mouse_hide();

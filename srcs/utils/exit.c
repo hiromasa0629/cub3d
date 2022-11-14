@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:57:16 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:28:40 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 14:04:36 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,6 @@ int	exit_hook(t_game *game)
 	destroy_all_images(game);
 	mlx_destroy_window(game->mlx, game->win);
 	free_splits(game->map);
-	system("leaks cub3d");
+	// system("leaks cub3d");
 	exit(0);
 }

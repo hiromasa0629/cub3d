@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 17:28:49 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 17:58:57 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:52:23 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,10 @@ void		free_splits(char **splits);
 int			ft_strncmp(const char *s1, const char *s2, size_t n);
 int			ft_atoi(const char *s);
 int			ft_strcmp(const char *s1, const char *s2);
+double		ft_sqr(double n);
 /* map_utils.c */
 int			is_space(char **lines, t_int_pos pos);
-int			is_wall(char **lines, t_int_pos pos);
+int			is_wall_door(char **lines, t_int_pos pos);
 int			is_player(char **lines, t_int_pos pos);
 int			is_floor(char **lines, t_int_pos pos);
 int			is_map_element(char **lines, t_int_pos pos);
@@ -52,6 +53,13 @@ void		save_new_paused_screen(t_game *game);
 t_color		int_to_rgb(uint32_t color);
 t_color		darker_rgb(t_color rgb);
 uint32_t	rgb_to_int(t_color rgb);
+/* image_utils.c */
+int			get_img_transparent(t_color *first, t_color *second, double percent);
+t_img		copy_image(t_game *game, t_img img);
+void		reset_img(t_game *game);
+/* door_utils.c */
+void		dda_door_3d(t_game *game, t_raycast *rc, int x, double percent);
+int			is_player_facing_door(t_game *game, t_raycast *rc);
 /* exit.c */
 void		exit_error(const char *s);
 int			exit_hook(t_game *game);

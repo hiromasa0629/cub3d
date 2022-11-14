@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 12:10:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 18:11:40 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 14:07:52 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	check_wall_collision(t_game *game, t_player player, double angle, int type)
 		pos.x = player.pos.x0 - cos(deg_to_rad(angle)) * PLAYER_STEP;
 		pos.y = player.pos.y0 + sin(deg_to_rad(angle)) * PLAYER_STEP;
 	}
-	if (is_wall(game->map, pos))
+	if (is_wall_door(game->map, pos) == 1 || is_wall_door(game->map, pos) == 2)
 		return (1);
 	return (0);
 }
@@ -102,6 +102,10 @@ int	handle_pause(t_game *game)
 
 int	handle_keypress(int key, t_game *game)
 {
+	if (key == OPEN_DOOR_BTN)
+		game->door_status = DOOR_OPEN;
+	if (key == CLOSE_DOOR_BTN)
+		game->door_status = DOOR_CLOSE;
 	if (key == P_BTN)
 		if (handle_pause(game))
 			return (0);

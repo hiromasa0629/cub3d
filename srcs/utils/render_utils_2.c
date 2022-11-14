@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/07 14:41:18 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/12 18:12:20 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:28:44 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,8 @@ void	destroy_all_images(t_game *game)
 	mlx_destroy_image(game->mlx, game->img_3d.img);
 	mlx_destroy_image(game->mlx, game->minimap.img.img);
 	mlx_destroy_image(game->mlx, game->paused_img.img);
+	mlx_destroy_image(game->mlx, game->frame_door_close.img);
+	mlx_destroy_image(game->mlx, game->frame_door_open.img);
 }
 
 void	save_new_paused_screen(t_game *game)

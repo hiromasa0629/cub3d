@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:47:20 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/10 17:14:14 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 13:31:46 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,4 +59,9 @@ int	ft_atoi(const char *s)
 		res = (res * 10) + (s[i++] - '0');
 	ans = ans * res;
 	return (ans);
+}
+
+double	ft_sqr(double n)
+{
+	return (n * n);
 }

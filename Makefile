@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/11/12 17:19:29 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/14 14:04:48 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,7 +36,7 @@ ${NAME}: $(OBJS)
 	${CC} ${LIBMLX} $(OBJS) -o ${NAME}
 	
 minimap:
-	$(CC) $(CFLAGS) -I includes $(LIBMLX) $(MINIMAP) -o minimap
+	$(CC) ${FSANITIZE} $(CFLAGS) -I includes $(LIBMLX) $(MINIMAP) -o minimap
 	
 clean:
 	${RM} -rv $(OBJSDIR)

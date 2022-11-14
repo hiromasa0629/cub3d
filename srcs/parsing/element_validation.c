@@ -6,7 +6,7 @@
 /*   By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/10/19 19:36:12 by hyap              #+#    #+#             */
-/*   Updated: 2022/11/09 19:45:48 by hyap             ###   ########.fr       */
+/*   Updated: 2022/11/14 14:08:55 by hyap             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,10 +97,7 @@ int	is_valid_line(char *line)
 		has_err = 1;
 	free_splits(splits);
 	if (has_err)
-	{
-		printf("line: %s\n", line);
 		return (0);
-	}
 	return (1);
 }
 
