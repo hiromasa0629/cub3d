@@ -6,7 +6,7 @@
 #    By: hyap <hyap@student.42kl.edu.my>            +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/10/19 15:59:25 by hyap              #+#    #+#              #
-#    Updated: 2022/11/14 14:04:48 by hyap             ###   ########.fr        #
+#    Updated: 2022/11/14 14:10:01 by hyap             ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = gcc
 CFLAGS = -Wall -Wextra -Werror
 LIBMLX = libmlx.dylib
 FSANITIZE = -fsanitize=address -g
-NAME = cub3d
+NAME = cub3D
 RM = rm -f
 MINIMAP = srcs/minimap/minimaptmp.c ${wildcard $(SRCSDIR)/utils/*.c} ${wildcard $(SRCSDIR)/gnl/*.c}
 
@@ -41,7 +41,7 @@ minimap:
 clean:
 	${RM} -rv $(OBJSDIR)
 
-fclean:
+fclean: clean
 	${RM} ${NAME}
 
 re: clean all
