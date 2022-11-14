@@ -6,7 +6,7 @@
 /*   By: yang <yang@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/09 17:27:17 by yang              #+#    #+#             */
-/*   Updated: 2022/11/14 15:05:30 by yang             ###   ########.fr       */
+/*   Updated: 2022/11/14 15:28:20 by yang             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,8 @@ static void	single_door_frame(t_game *game, double percent)
 
 static void	opening_closing_door(t_game *game, t_raycast *rc, int handle_door)
 {
-	static double	frame;
+	static double	frame = 0.1;
 
-	frame = 0.1;
 	frame_door_open_close(game);
 	if (frame < 1.0)
 		single_door_frame(game, frame);
